@@ -27,7 +27,8 @@ export class DataService {
     return this.userRepository.findOne(condition);
   }
 
-  datePost(userData: any): Observable<UserData> {
+  datePost(user: User, userData: any): Observable<UserData> {
+    userData.author = user;
     return from(this.userDataRepository.save(userData));
   }
 

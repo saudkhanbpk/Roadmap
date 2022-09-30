@@ -16,6 +16,7 @@ import {
 import { Observable } from 'rxjs';
 import { AppService } from 'src/app.service';
 import { UserData } from 'src/enterfaces/data.model';
+import { User } from 'src/enterfaces/user.class';
 import { DataEntity } from 'src/entity/userdata.entity';
 import { DataService } from 'src/sevices/data.service';
 import { DeleteResult, UpdateResult } from 'typeorm';
@@ -25,8 +26,8 @@ export class DataController {
   constructor(private dataService: DataService) {}
 
   @Post('user/data')
-  postdate(@Body() userData: UserData): Observable<UserData> {
-    return this.dataService.datePost(userData);
+  postdate(@Body() userData: UserData, @Request() req): Observable<UserData> {
+    return this.dataService.datePost(req.user, userData);
   }
 
   @Put('user/data/:id')
