@@ -39,14 +39,17 @@ export class AppController {
     @Body('email') email: string,
     @Body('companyname') companyname: string,
     @Body('password') password: string,
+    @Body('confirmPassword') confirmPassword: string,
+    @Body('phoneNumber') phoneNumber: string,
   ) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await this.appService.create({
       name,
       email,
-      companyname,
       password: hashedPassword,
+      phoneNumber,
+      confirmPassword,
     });
     delete user.password;
     return { user: user, message: 'Register' };

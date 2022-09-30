@@ -20,7 +20,7 @@ export class UserEntity {
   name: string;
 
   @Column()
-  companyname: string;
+  phoneNumber: string;
 
   @Index('UQ_user_email', { unique: true })
   @Column()
@@ -28,6 +28,9 @@ export class UserEntity {
 
   @Column()
   password: string;
+
+  @Column()
+  confirmPassword: string;
 
   @OneToMany(() => NewTaskEntity, (newTaskEntity) => newTaskEntity.author)
   newtask: NewTaskEntity[];

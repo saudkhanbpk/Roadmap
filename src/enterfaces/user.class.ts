@@ -1,8 +1,9 @@
 export class User {
   id?: number;
-  firstName?: string;
-  lastName?: string;
+  phoneNumber?: string;
+  name?: string;
   email?: string;
   password?: string;
   imagePath?: string;
+  confirmPassword?: string;
 }
