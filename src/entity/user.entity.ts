@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { NewTaskEntity } from './taske.entity';
+import { TaskEntity } from './taske.entity';
 import { DataEntity } from './userdata.entity';
 // import { DataEntity } from './data.entity';
 // import { NewTaskEntity } from './newData.entity';
@@ -32,10 +32,7 @@ export class UserEntity {
   @Column()
   confirmPassword: string;
 
-  @OneToMany(() => NewTaskEntity, (newTaskEntity) => newTaskEntity.author)
-  newtask: NewTaskEntity[];
-
-  @OneToMany(() => DataEntity, (DataEntity) => DataEntity.user, {
+  @OneToMany(() => DataEntity, (DataEntity) => DataEntity.author, {
     cascade: true,
     onDelete: 'CASCADE',
     nullable: true,

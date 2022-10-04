@@ -1,11 +1,8 @@
 import { User } from './user.class';
 
-export interface UserNewTask {
+export interface Task {
   id?: number;
   author?: User;
-  members?: string;
-  deadline?: string;
-  created?: string;
-  updateBy?: string;
-  comments?: string[];
+  completed?: string;
+  text?: string;
 }

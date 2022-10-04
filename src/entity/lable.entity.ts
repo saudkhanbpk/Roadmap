@@ -9,22 +9,22 @@ import { UserEntity } from './user.entity';
 import { DataEntity } from './userdata.entity';
 // import { DataEntity } from './data.entity';
 
-@Entity('task')
-export class TaskEntity {
+@Entity('lable')
+export class LableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ default: '' })
-  completed: string;
+  color: string;
 
   @Column({ default: '' })
   text: string;
 
-  // @ManyToOne(() => DataEntity, (dataEntity) => dataEntity.task)
-  // taskdata: DataEntity;
+  // @ManyToOne(() => DataEntity, (userEntity) => userEntity.lable)
+  // labledata: DataEntity;
 
-  // @OneToMany(() => DataEntity, (newTaskEntity) => newTaskEntity.taskdata)
-  // task: DataEntity[];
+  // @OneToMany(() => DataEntity, (lableEntity) => lableEntity.labledata)
+  // lable: DataEntity[];
 
   //   @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.position, {
   //     eager: true,

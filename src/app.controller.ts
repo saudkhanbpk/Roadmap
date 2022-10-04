@@ -25,8 +25,8 @@ import { UpdateResult, DeleteResult } from 'typeorm';
 // import { NewTaskEntity } from './newData.entity';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { UserData } from './enterfaces/data.model';
-import { UserNewTask } from './enterfaces/task.model';
-import { NewTaskEntity } from './entity/taske.entity';
+import { Task } from './enterfaces/task.model';
+import { TaskEntity } from './entity/taske.entity';
 import { DataEntity } from './entity/userdata.entity';
 
 @Controller('api')

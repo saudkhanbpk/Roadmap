@@ -6,9 +6,9 @@ import { from, Observable } from 'rxjs';
 import { UserEntity } from 'src/entity/user.entity';
 import { DataEntity } from 'src/entity/userdata.entity';
 import { UserData } from 'src/enterfaces/data.model';
-import { UserNewTask } from 'src/enterfaces/task.model';
+// import { UserNewTask } from 'src/enterfaces/task.model';
 import { User } from 'src/enterfaces/user.class';
-import { NewTaskEntity } from 'src/entity/taske.entity';
+import { TaskEntity } from 'src/entity/taske.entity';
 
 @Injectable()
 export class DataService {
@@ -17,8 +17,8 @@ export class DataService {
     private userRepository: Repository<UserEntity>,
     @InjectRepository(DataEntity)
     private userDataRepository: Repository<DataEntity>,
-    @InjectRepository(NewTaskEntity)
-    private userNewDataRepository: Repository<NewTaskEntity>,
+    @InjectRepository(TaskEntity)
+    private userNewDataRepository: Repository<TaskEntity>,
   ) {}
   async create(data: any): Promise<UserEntity> {
     return this.userRepository.save(data);
@@ -27,15 +27,26 @@ export class DataService {
     return this.userRepository.findOne(condition);
   }
 
-  datePost(user: User, userData: any): Observable<UserData> {
+  creatdate(user: User, userData: UserData): Observable<UserData> {
     userData.author = user;
     return from(this.userDataRepository.save(userData));
+  }
+
+  updatePost(
+    userData: UserData,
+    id: number,
+    user: User,
+  ): Observable<UpdateResult> {
+    // const user: User = new UserEntity();
+    // user.id = id;
+    userData.author = user;
+    return from(this.userDataRepository.update(id, userData));
   }
 
   findAllPosts(userdataId: any): Observable<DataEntity[]> {
     return from(this.userDataRepository.find(userdataId));
   }
-  findAllnewPosts(userNewDataId: any): Observable<NewTaskEntity[]> {
+  findAllnewPosts(userNewDataId: any): Observable<TaskEntity[]> {
     return from(this.userNewDataRepository.find(userNewDataId));
   }
 
@@ -44,11 +55,6 @@ export class DataService {
     return from(this.userDataRepository.findOne({ where: { id: roadMapId } }));
   }
 
-  updatePost(UserData: DataEntity, id: number): Observable<UpdateResult> {
-    const user: User = new UserEntity();
-    user.id = id;
-    return from(this.userDataRepository.update(id, UserData));
-  }
   // updatenewdatePost(
   //   UserNewTask: NewTaskEntity,
   //   id: number,

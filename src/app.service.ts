@@ -4,11 +4,12 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { UserData } from './enterfaces/data.model';
-import { UserNewTask } from './enterfaces/task.model';
+// import { UserNewTask } from './enterfaces/task.model';
 import { User } from './enterfaces/user.class';
-import { NewTaskEntity } from './entity/taske.entity';
+// import { NewTaskEntity } from './entity/taske.entity';
 import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
+import { TaskEntity } from './entity/taske.entity';
 
 @Injectable()
 export class AppService {
@@ -17,8 +18,8 @@ export class AppService {
     private userRepository: Repository<UserEntity>,
     @InjectRepository(DataEntity)
     private userDataRepository: Repository<DataEntity>,
-    @InjectRepository(NewTaskEntity)
-    private userNewDataRepository: Repository<NewTaskEntity>,
+    @InjectRepository(TaskEntity)
+    private userNewDataRepository: Repository<TaskEntity>,
   ) {}
   async create(data: any): Promise<UserEntity> {
     return this.userRepository.save(data);
