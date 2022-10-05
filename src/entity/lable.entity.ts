@@ -3,11 +3,9 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  OneToMany,
+  JoinColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
-import { DataEntity } from './userdata.entity';
-// import { DataEntity } from './data.entity';
+import { CardsEntity } from './cards.entity';
 
 @Entity('lable')
 export class LableEntity {
@@ -20,15 +18,7 @@ export class LableEntity {
   @Column({ default: '' })
   text: string;
 
-  // @ManyToOne(() => DataEntity, (userEntity) => userEntity.lable)
-  // labledata: DataEntity;
-
-  // @OneToMany(() => DataEntity, (lableEntity) => lableEntity.labledata)
-  // lable: DataEntity[];
-
-  //   @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.position, {
-  //     eager: true,
-  //     nullable: true,
-  //   })
-  //   positiondata: DataEntity;
+  @ManyToOne(() => CardsEntity, (userEntity) => userEntity.labels)
+  @JoinColumn({ name: 'lableId' })
+  labledata: CardsEntity;
 }

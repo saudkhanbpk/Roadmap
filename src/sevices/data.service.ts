@@ -27,19 +27,13 @@ export class DataService {
     return this.userRepository.findOne(condition);
   }
 
-  creatdate(user: User, userData: UserData): Observable<UserData> {
-    userData.author = user;
+  creatdate(user: User, userData: DataEntity): Observable<DataEntity> {
     return from(this.userDataRepository.save(userData));
   }
 
-  updatePost(
-    userData: UserData,
-    id: number,
-    user: User,
-  ): Observable<UpdateResult> {
+  updatePost(userData: DataEntity, id: number): Observable<UpdateResult> {
     // const user: User = new UserEntity();
     // user.id = id;
-    userData.author = user;
     return from(this.userDataRepository.update(id, userData));
   }
 

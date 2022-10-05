@@ -26,17 +26,17 @@ export class DataController {
   constructor(private dataService: DataService) {}
 
   @Post('user/data')
-  create(@Body() userData: UserData, @Request() req): Observable<UserData> {
+  create(@Body() userData: DataEntity, @Request() req): Observable<DataEntity> {
     return this.dataService.creatdate(req.user, userData);
   }
 
   @Put('user/data/:id')
   update(
     @Request() req,
-    @Body() userData: UserData,
+    @Body() userData: DataEntity,
     @Param('id') id: number,
   ): Observable<UpdateResult> {
-    return this.dataService.updatePost(userData, id, req.user);
+    return this.dataService.updatePost(userData, id);
   }
 
   @Get('user/data')

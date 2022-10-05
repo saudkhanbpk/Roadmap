@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DataController } from './controllers/data.controller';
+import { CardsEntity } from './entity/cards.entity';
 import { LableEntity } from './entity/lable.entity';
 import { TaskEntity } from './entity/taske.entity';
 import { UserEntity } from './entity/user.entity';
@@ -27,10 +28,16 @@ import { DataService } from './sevices/data.service';
       username: 'postgres',
       password: '393939Sk',
       database: 'roadmap',
-      entities: [UserEntity, DataEntity, TaskEntity, LableEntity],
+      entities: [UserEntity, DataEntity, TaskEntity, LableEntity, CardsEntity],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserEntity, DataEntity, TaskEntity, LableEntity]),
+    TypeOrmModule.forFeature([
+      UserEntity,
+      DataEntity,
+      TaskEntity,
+      LableEntity,
+      CardsEntity,
+    ]),
     JwtModule.register({
       secret: 'secret',
       signOptions: { expiresIn: '1d' },

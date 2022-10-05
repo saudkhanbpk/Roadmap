@@ -3,12 +3,9 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  OneToMany,
+  JoinColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
-import { DataEntity } from './userdata.entity';
-// import { DataEntity } from './data.entity';
-
+import { CardsEntity } from './cards.entity';
 @Entity('task')
 export class TaskEntity {
   @PrimaryGeneratedColumn()
@@ -20,15 +17,7 @@ export class TaskEntity {
   @Column({ default: '' })
   text: string;
 
-  // @ManyToOne(() => DataEntity, (dataEntity) => dataEntity.task)
-  // taskdata: DataEntity;
-
-  // @OneToMany(() => DataEntity, (newTaskEntity) => newTaskEntity.taskdata)
-  // task: DataEntity[];
-
-  //   @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.position, {
-  //     eager: true,
-  //     nullable: true,
-  //   })
-  //   positiondata: DataEntity;
+  @ManyToOne(() => CardsEntity, (dataEntity) => dataEntity.tasks)
+  @JoinColumn({ name: 'dataId' })
+  taskdata: CardsEntity;
 }
