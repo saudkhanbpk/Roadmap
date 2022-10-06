@@ -21,26 +21,26 @@ export class CardsEntity {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
-  @OneToMany(() => LableEntity, (newTaskEntity) => newTaskEntity.labledata, {
-    cascade: true,
-    onDelete: 'CASCADE',
-    eager: true,
-    nullable: true,
-  })
-  labels: LableEntity[];
+  // @OneToMany(() => LableEntity, (newTaskEntity) => newTaskEntity.labledata, {
+  //   cascade: true,
+  //   onDelete: 'CASCADE',
+  //   eager: true,
+  //   nullable: true,
+  // })
+  // labels: LableEntity[];
 
-  @OneToMany(() => TaskEntity, (newTaskEntity) => newTaskEntity.taskdata, {
-    cascade: true,
-    onDelete: 'CASCADE',
-    eager: true,
-    nullable: true,
-  })
-  tasks: TaskEntity[];
+  // @OneToMany(() => TaskEntity, (newTaskEntity) => newTaskEntity.taskdata, {
+  //   cascade: true,
+  //   onDelete: 'CASCADE',
+  //   eager: true,
+  //   nullable: true,
+  // })
+  // tasks: TaskEntity[];
 
   @Column({ default: '' })
   title: string;
 
-  @ManyToOne(() => DataEntity, (dataEntity) => dataEntity.cards)
-  @JoinColumn({ name: 'dataId' })
-  taskdata: DataEntity;
+  // @ManyToOne(() => DataEntity, (dataEntity) => dataEntity.cards)
+  // @JoinColumn({ name: 'dataId' })
+  // taskdata: DataEntity;
 }

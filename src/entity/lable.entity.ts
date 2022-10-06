@@ -18,7 +18,7 @@ export class LableEntity {
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (userEntity) => userEntity.labels)
-  @JoinColumn({ name: 'lableId' })
-  labledata: CardsEntity;
+  // @ManyToOne(() => CardsEntity, (userEntity) => userEntity.labels)
+  // @JoinColumn({ name: 'lableId' })
+  // labledata: CardsEntity;
 }

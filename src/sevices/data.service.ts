@@ -27,7 +27,7 @@ export class DataService {
     return this.userRepository.findOne(condition);
   }
 
-  creatdate(user: User, userData: DataEntity): Observable<DataEntity> {
+  creatdate( userData: DataEntity): Observable<DataEntity> {
     return from(this.userDataRepository.save(userData));
   }
 

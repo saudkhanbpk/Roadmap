@@ -26,8 +26,8 @@ export class DataController {
   constructor(private dataService: DataService) {}
 
   @Post('user/data')
-  create(@Body() userData: DataEntity, @Request() req): Observable<DataEntity> {
-    return this.dataService.creatdate(req.user, userData);
+  create(@Body() userData: DataEntity): Observable<DataEntity> {
+    return this.dataService.creatdate(userData);
   }
 
   @Put('user/data/:id')
@@ -36,7 +36,11 @@ export class DataController {
     @Body() userData: DataEntity,
     @Param('id') id: number,
   ): Observable<UpdateResult> {
-    return this.dataService.updatePost(userData, id);
+    if(id){
+      return this.dataService.updatePost(userData, id);
+    }else if(!userData.id){
+      this.create(userData)
+    }
   }
 
   @Get('user/data')
