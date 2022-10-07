@@ -18,6 +18,9 @@ export class CardsEntity {
   @Column({ default: '' })
   desc: string;
 
+  @Column({ default: '' })
+  keyid: string;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 

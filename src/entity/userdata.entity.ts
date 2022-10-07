@@ -11,10 +11,14 @@ import { UserEntity } from './user.entity';
 @Entity('data')
 export class DataEntity {
   @PrimaryGeneratedColumn()
+  // @Column({ default: '' })
   id: number;
 
   @Column({ default: '' })
   title: string;
+
+  @Column({ default: '' })
+  keyid: string;
 
   @OneToMany(() => CardsEntity, (newTaskEntity) => newTaskEntity.taskdata, {
     cascade: true,

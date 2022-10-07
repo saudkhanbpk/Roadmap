@@ -2,14 +2,10 @@ import {
   Column,
   Entity,
   Index,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { TaskEntity } from './taske.entity';
 import { DataEntity } from './userdata.entity';
-// import { DataEntity } from './data.entity';
-// import { NewTaskEntity } from './newData.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -31,6 +27,9 @@ export class UserEntity {
 
   @Column()
   confirmPassword: string;
+
+  @Column({ nullable: true })
+  imagePath: string;
 
   @OneToMany(() => DataEntity, (DataEntity) => DataEntity.author, {
     cascade: true,

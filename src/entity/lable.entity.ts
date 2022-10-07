@@ -10,6 +10,7 @@ import { CardsEntity } from './cards.entity';
 @Entity('lable')
 export class LableEntity {
   @PrimaryGeneratedColumn()
+  // @Column({ default: '' })
   id: number;
 
   @Column({ default: '' })

@@ -60,7 +60,7 @@ export class DataService {
 
   // newdatePost(userNewTask: UserNewTask): Observable<UserNewTask> {
   //   return from(this.userNewDataRepository.save(userNewTask));
-  // }
+  // }z
 
   deleteRoadMap(id: number): Observable<DeleteResult> {
     // const apartmentTypeRepo: Repository<UserEntity> = getRepository(CartEntity);
