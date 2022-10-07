@@ -1,13 +1,9 @@
-import { HttpException, Injectable } from '@nestjs/common';
-// import { UserEntity } from './user.entity';
+import { Injectable } from '@nestjs/common';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { UserEntity } from 'src/entity/user.entity';
 import { DataEntity } from 'src/entity/userdata.entity';
-import { UserData } from 'src/enterfaces/data.model';
-// import { UserNewTask } from 'src/enterfaces/task.model';
-import { User } from 'src/enterfaces/user.class';
 import { TaskEntity } from 'src/entity/taske.entity';
 
 @Injectable()
@@ -27,7 +23,7 @@ export class DataService {
     return this.userRepository.findOne(condition);
   }
 
-  creatdate( userData: DataEntity): Observable<DataEntity> {
+  creatdate(userData: DataEntity): Observable<DataEntity> {
     return from(this.userDataRepository.save(userData));
   }
 

@@ -7,16 +7,10 @@ import {
   Param,
   Post,
   Put,
-  Query,
   Req,
   Request,
-  Res,
-  UseGuards,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AppService } from 'src/app.service';
-import { UserData } from 'src/enterfaces/data.model';
-import { User } from 'src/enterfaces/user.class';
 import { DataEntity } from 'src/entity/userdata.entity';
 import { DataService } from 'src/sevices/data.service';
 import { DeleteResult, UpdateResult } from 'typeorm';
@@ -36,11 +30,7 @@ export class DataController {
     @Body() userData: DataEntity,
     @Param('id') id: number,
   ): Observable<UpdateResult> {
-    if(id){
-      return this.dataService.updatePost(userData, id);
-    }else if(!userData.id){
-      this.create(userData)
-    }
+    return this.dataService.updatePost(userData, id);
   }
 
   @Get('user/data')

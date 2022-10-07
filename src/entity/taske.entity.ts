@@ -1,15 +1,7 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-} from 'typeorm';
-import { CardsEntity } from './cards.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('task')
 export class TaskEntity {
   @PrimaryGeneratedColumn()
-  // @Column({ default: '' })
   id: number;
 
   @Column({ default: '' })
@@ -20,8 +12,4 @@ export class TaskEntity {
 
   @Column({ default: '' })
   text: string;
-
-  // @ManyToOne(() => CardsEntity, (dataEntity) => dataEntity.tasks)
-  // @JoinColumn({ name: 'dataId' })
-  // taskdata: CardsEntity;
 }

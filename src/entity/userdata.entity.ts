@@ -1,17 +1,9 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  OneToMany,
-} from 'typeorm';
-import { CardsEntity } from './cards.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserEntity } from './user.entity';
 
 @Entity('data')
 export class DataEntity {
   @PrimaryGeneratedColumn()
-  // @Column({ default: '' })
   id: number;
 
   @Column({ default: '' })
@@ -19,13 +11,8 @@ export class DataEntity {
 
   @Column({ default: '' })
   ik: string;
-  // @OneToMany(() => CardsEntity, (newTaskEntity) => newTaskEntity.taskdata, {
-  //   cascade: true,
-  //   onDelete: 'CASCADE',
-  //   eager: true,
-  //   nullable: true,
-  // })
-  @Column( 'text' , { array: true, nullable: true})
+
+  @Column('text', { array: true, nullable: true })
   cards: string[];
 
   @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
