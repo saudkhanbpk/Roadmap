@@ -6,28 +6,12 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
-  Put,
   Req,
   Res,
-  Delete,
   UnauthorizedException,
-  HttpCode,
-  UseInterceptors,
-  UploadedFiles,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Observable } from 'rxjs';
-// import { DataEntity } from './data.entity';
-// import { UserData, UserNewTask } from './data.interface';
-import { UpdateResult, DeleteResult } from 'typeorm';
-// import { NewTaskEntity } from './newData.entity';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import { UserData } from './enterfaces/data.model';
-import { Task } from './enterfaces/task.model';
-import { TaskEntity } from './entity/taske.entity';
-import { DataEntity } from './entity/userdata.entity';
 
 @Controller('api')
 export class AppController {
@@ -93,6 +77,7 @@ export class AppController {
         where: { id: data['id'] },
       });
       console.log('error :', user);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     } catch (e) {
@@ -109,59 +94,6 @@ export class AppController {
       message: 'success',
     };
   }
-
-  // @Post('user/data')
-  // postdate(@Body() userData: UserData): Observable<UserData> {
-  //   return this.appService.datePost(userData);
-  // }
-  // @Post('user/newtask')
-  // postnewdate(@Body() userNewTask: UserNewTask): Observable<UserNewTask> {
-  //   return this.appService.newdatePost(userNewTask);
-  // }
-
-  // @Put('user/newtask/:id')
-  // updatetask(
-  //   @Body() userNewTask: NewTaskEntity,
-  //   @Param('id') id: number,
-  // ): Observable<UpdateResult> {
-  //   return this.appService.updatenewdatePost(userNewTask, id);
-  // }
-  // @Put('user/data/:id')
-  // update(
-  //   @Body() userData: DataEntity,
-  //   @Param('id') id: number,
-  // ): Observable<UpdateResult> {
-  //   return this.appService.updatePost(userData, id);
-  // }
-
-  // @Get('user/data')
-  // findAll(userdataId: any): Observable<DataEntity[]> {
-  //   return this.appService.findAllPosts(userdataId);
-  // }
-
-  // @Get('/user/data/:id')
-  // @HttpCode(200)
-  // async getRoadmapById(
-  //   @Req() @Param('id') id: number,
-  // ): Promise<Observable<DataEntity>> {
-  //   return this.appService.findRoadmapById(id);
-  //   // return { data: deleteResponse, message: 'delete object' };
-  // }
-
-  // @Get('user/newtask')
-  // findAllNew(userNewTaskId: any): Observable<NewTaskEntity[]> {
-  //   return this.appService.findAllnewPosts(userNewTaskId);
-  // }
-
-  // @Delete('/user/data/:id')
-  // // @HttpCode(200)
-  // // async deleteRoadMap(@Req() req: RequestWithUser, @Param('id') id: number) {
-  // async deleteRoadMap(
-  //   @Req() @Param('id') id: number,
-  // ): Promise<Observable<DeleteResult>> {
-  //   return this.appService.deleteRoadMap(id);
-  //   // return { data: deleteResponse, message: 'delete object' };
-  // }
 
   // @Post('images')
   // @UseInterceptors(FilesInterceptor('profile'))

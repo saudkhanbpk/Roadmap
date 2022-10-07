@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { UserEntity } from 'src/entity/user.entity';
 import { DataEntity } from 'src/entity/userdata.entity';
-import { TaskEntity } from 'src/entity/taske.entity';
 
 @Injectable()
 export class DataService {
@@ -13,8 +12,6 @@ export class DataService {
     private userRepository: Repository<UserEntity>,
     @InjectRepository(DataEntity)
     private userDataRepository: Repository<DataEntity>,
-    @InjectRepository(TaskEntity)
-    private userNewDataRepository: Repository<TaskEntity>,
   ) {}
   async create(data: any): Promise<UserEntity> {
     return this.userRepository.save(data);
@@ -35,9 +32,6 @@ export class DataService {
 
   findAllPosts(userdataId: any): Observable<DataEntity[]> {
     return from(this.userDataRepository.find(userdataId));
-  }
-  findAllnewPosts(userNewDataId: any): Observable<TaskEntity[]> {
-    return from(this.userNewDataRepository.find(userNewDataId));
   }
 
   findRoadmapById(roadMapId: any): Observable<DataEntity> {
