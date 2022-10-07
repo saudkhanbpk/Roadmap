@@ -34,35 +34,10 @@ export class DataService {
     return from(this.userDataRepository.find(userdataId));
   }
 
-  // findPosts(take = 10, skip = 0): Observable<DataEntity[]> {
-  //   return from(
-  //     this.userDataRepository
-  //       .createQueryBuilder('post')
-  //       .innerJoinAndSelect('post.author', 'author')
-  //       .orderBy('post.createdAt', 'DESC')
-  //       .take(take)
-  //       .skip(skip)
-  //       .getMany(),
-  //   );
-  // }
-
   findRoadmapById(roadMapId: any): Observable<DataEntity> {
     // return from(this.userDataRepository.findOne(roadMapId));
     return from(this.userDataRepository.findOne({ where: { id: roadMapId } }));
   }
-
-  // updatenewdatePost(
-  //   UserNewTask: NewTaskEntity,
-  //   id: number,
-  // ): Observable<UpdateResult> {
-  //   const user: User = new UserEntity();
-  //   user.id = id;
-  //   return from(this.userNewDataRepository.update(id, UserNewTask));
-  // }
-
-  // newdatePost(userNewTask: UserNewTask): Observable<UserNewTask> {
-  //   return from(this.userNewDataRepository.save(userNewTask));
-  // }z
 
   deleteRoadMap(id: number): Observable<DeleteResult> {
     // const apartmentTypeRepo: Repository<UserEntity> = getRepository(CartEntity);
