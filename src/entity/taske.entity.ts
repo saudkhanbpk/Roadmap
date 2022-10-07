@@ -21,7 +21,7 @@ export class TaskEntity {
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (dataEntity) => dataEntity.tasks)
-  @JoinColumn({ name: 'dataId' })
-  taskdata: CardsEntity;
+  // @ManyToOne(() => CardsEntity, (dataEntity) => dataEntity.tasks)
+  // @JoinColumn({ name: 'dataId' })
+  // taskdata: CardsEntity;
 }

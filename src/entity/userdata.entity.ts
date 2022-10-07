@@ -18,15 +18,15 @@ export class DataEntity {
   title: string;
 
   @Column({ default: '' })
-  keyid: string;
-
-  @OneToMany(() => CardsEntity, (newTaskEntity) => newTaskEntity.taskdata, {
-    cascade: true,
-    onDelete: 'CASCADE',
-    eager: true,
-    nullable: true,
-  })
-  cards: CardsEntity[];
+  ik: string;
+  // @OneToMany(() => CardsEntity, (newTaskEntity) => newTaskEntity.taskdata, {
+  //   cascade: true,
+  //   onDelete: 'CASCADE',
+  //   eager: true,
+  //   nullable: true,
+  // })
+  @Column( 'text' , { array: true, nullable: true})
+  cards: string[];
 
   @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
     eager: true,
