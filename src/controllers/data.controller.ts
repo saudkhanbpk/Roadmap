@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
   Request,
 } from '@nestjs/common';
@@ -33,10 +34,24 @@ export class DataController {
     return this.dataService.updatePost(userData, id);
   }
 
-  @Get('user/data')
+  @Get('user/alldata')
   findAll(userData: DataEntity): Observable<DataEntity[]> {
     return this.dataService.findAllPosts(userData);
   }
+
+  @Get('user/databy/:id')
+  findone(userData: DataEntity): Observable<DataEntity> {
+    return this.dataService.findRoadmapById(userData);
+  }
+
+  // @Get('user/data/4')
+  // findSelected(
+  //   @Query('take') take = 1,
+  //   @Query('skip') skip = 1,
+  // ): Observable<DataEntity[]> {
+  //   take = take > 20 ? 20 : take;
+  //   return this.dataService.findPosts(take, skip);
+  // }
 
   @Get('/user/data/:id')
   @HttpCode(200)

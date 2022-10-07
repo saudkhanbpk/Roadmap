@@ -16,8 +16,8 @@ export class DataService {
   async create(data: any): Promise<UserEntity> {
     return this.userRepository.save(data);
   }
-  async findOne(condition: any): Promise<UserEntity> {
-    return this.userRepository.findOne(condition);
+  async findOne(condition: any): Promise<DataEntity> {
+    return this.userDataRepository.findOne(condition);
   }
 
   creatdate(userData: DataEntity): Observable<DataEntity> {
@@ -33,6 +33,18 @@ export class DataService {
   findAllPosts(userdataId: any): Observable<DataEntity[]> {
     return from(this.userDataRepository.find(userdataId));
   }
+
+  // findPosts(take = 10, skip = 0): Observable<DataEntity[]> {
+  //   return from(
+  //     this.userDataRepository
+  //       .createQueryBuilder('post')
+  //       .innerJoinAndSelect('post.author', 'author')
+  //       .orderBy('post.createdAt', 'DESC')
+  //       .take(take)
+  //       .skip(skip)
+  //       .getMany(),
+  //   );
+  // }
 
   findRoadmapById(roadMapId: any): Observable<DataEntity> {
     // return from(this.userDataRepository.findOne(roadMapId));
