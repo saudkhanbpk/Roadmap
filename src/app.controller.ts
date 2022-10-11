@@ -98,11 +98,11 @@ export class AppController {
     };
   }
 
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadImage(@UploadedFile() file: Express.Multer.File) {
-    return this.appService.uploadImageToCloudinary(file);
-  }
+  // @Post('upload')
+  // @UseInterceptors(FileInterceptor('file'))
+  // uploadImage(@UploadedFile() file: Express.Multer.File) {
+  //   return this.appService.uploadImageToCloudinary(file);
+  // }
 
   // @Post('images')
   // @UseInterceptors(FilesInterceptor('profile'))

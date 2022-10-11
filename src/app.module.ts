@@ -4,7 +4,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CloudinaryModule } from './cloudinary/cloudinary.module';
+// import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { DataController } from './controllers/data.controller';
 import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
@@ -12,7 +12,7 @@ import { DataService } from './sevices/data.service';
 
 @Module({
   imports: [
-    CloudinaryModule,
+    // CloudinaryModule,
     MulterModule.register({
       dest: './images',
     }),
