@@ -10,8 +10,11 @@ import {
   Req,
   Res,
   UnauthorizedException,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('api')
 export class AppController {
@@ -93,6 +96,12 @@ export class AppController {
     return {
       message: 'success',
     };
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadImage(@UploadedFile() file: Express.Multer.File) {
+    return this.appService.uploadImageToCloudinary(file);
   }
 
   // @Post('images')

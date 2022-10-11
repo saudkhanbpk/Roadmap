@@ -9,9 +9,18 @@ import {
   Put,
   Req,
   Request,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { join } from 'path';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { DataEntity } from 'src/entity/userdata.entity';
+// import {
+//   isFileExtensionSafe,
+//   removeFile,
+//   saveImageToStorage,
+// } from 'src/helpers/image.storage';
 import { DataService } from 'src/sevices/data.service';
 import { DeleteResult, UpdateResult } from 'typeorm';
 
@@ -56,4 +65,33 @@ export class DataController {
   findAll(userData: DataEntity): Observable<DataEntity[]> {
     return this.dataService.findAllPosts(userData);
   }
+
+  // @Post('upload')
+  // @UseInterceptors(FileInterceptor('file', saveImageToStorage))
+  // uploadImage(
+  //   @UploadedFile() file: Express.Multer.File,
+  //   @Request() req,
+  // ): Observable<{ modifiedFileName: string } | { error: string }> {
+  //   const fileName = file?.filename;
+
+  //   if (!fileName) return of({ error: 'File must be a png, jpg/jpeg' });
+
+  //   const imagesFolderPath = join(process.cwd(), 'images');
+  //   const fullImagePath = join(imagesFolderPath + '/' + file.filename);
+
+  //   return isFileExtensionSafe(fullImagePath).pipe(
+  //     switchMap((isFileLegit: boolean) => {
+  //       if (isFileLegit) {
+  //         const userId = req.user.id;
+  //         return this.dataService.updateUserImageById(userId, fileName).pipe(
+  //           map(() => ({
+  //             modifiedFileName: file.filename,
+  //           })),
+  //         );
+  //       }
+  //       removeFile(fullImagePath);
+  //       return of({ error: 'File content does not match extension!' });
+  //     }),
+  //   );
+  // }
 }

@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { UserEntity } from 'src/entity/user.entity';
 import { DataEntity } from 'src/entity/userdata.entity';
+import { User } from 'src/enterfaces/user.class';
 
 @Injectable()
 export class DataService {
@@ -52,4 +53,11 @@ export class DataService {
     // this.userDataRepository.delete(id);
     // return roadMap;
   }
+
+  // updateUserImageById(id: number, imagePath: string): Observable<UpdateResult> {
+  //   const user: User = new UserEntity();
+  //   user.id = id;
+  //   user.imagePath = imagePath;
+  //   return from(this.userRepository.update(id, user));
+  // }
 }
