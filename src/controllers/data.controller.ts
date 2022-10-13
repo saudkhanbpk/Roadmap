@@ -39,6 +39,7 @@ export class DataController {
     @Body() userData: DataEntity,
     @Param('id') id: number,
   ): Observable<UpdateResult> {
+    console.log('userdata', userData);
     return this.dataService.updatePost(userData, id);
   }
 

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { CardsEntity } from './cards.entity';
 
 @Entity('lable')
 export class LableEntity {
@@ -10,4 +11,10 @@ export class LableEntity {
 
   @Column({ default: '' })
   text: string;
+
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.lable, {
+    eager: true,
+    nullable: true,
+  })
+  labledata: CardsEntity;
 }

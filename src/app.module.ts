@@ -6,6 +6,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { DataController } from './controllers/data.controller';
+import { CardsEntity } from './entity/cards.entity';
+import { LableEntity } from './entity/lable.entity';
+import { TaskEntity } from './entity/taske.entity';
 import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
 import { DataService } from './sevices/data.service';
@@ -23,10 +26,16 @@ import { DataService } from './sevices/data.service';
       username: 'postgres',
       password: '393939Sk',
       database: 'roadmap',
-      entities: [UserEntity, DataEntity],
+      entities: [UserEntity, DataEntity, CardsEntity, TaskEntity, LableEntity],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserEntity, DataEntity]),
+    TypeOrmModule.forFeature([
+      UserEntity,
+      DataEntity,
+      CardsEntity,
+      TaskEntity,
+      LableEntity,
+    ]),
     JwtModule.register({
       secret: 'secret',
       signOptions: { expiresIn: '1d' },

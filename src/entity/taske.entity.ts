@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { CardsEntity } from './cards.entity';
 @Entity('task')
 export class TaskEntity {
   @PrimaryGeneratedColumn()
@@ -12,4 +13,10 @@ export class TaskEntity {
 
   @Column({ default: '' })
   text: string;
+
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.task, {
+    eager: true,
+    nullable: true,
+  })
+  taskdata: CardsEntity;
 }
