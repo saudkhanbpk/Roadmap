@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  Patch,
   Post,
   Put,
   Req,
@@ -15,6 +16,8 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { userdataDto } from 'src/dtos/userdatdtos';
+import { UserData } from 'src/enterfaces/userdata.model';
 import { DataEntity } from 'src/entity/userdata.entity';
 // import {
 //   isFileExtensionSafe,
@@ -29,17 +32,13 @@ export class DataController {
   constructor(private dataService: DataService) {}
 
   @Post('user/data')
-  create(@Body() userData: DataEntity): Observable<DataEntity> {
+  create(@Body() userData: DataEntity) {
     return this.dataService.creatdate(userData);
   }
 
   @Put('user/data/:id')
-  update(
-    @Request() req,
-    @Body() userData: DataEntity,
-    @Param('id') id: number,
-  ): Observable<UpdateResult> {
-    console.log('userdata', userData);
+  update(@Body() userData: userdataDto, @Param('id') id: number) {
+    // console.log('userdata', userData);
     return this.dataService.updatePost(userData, id);
   }
 
@@ -63,9 +62,16 @@ export class DataController {
   }
 
   @Get('user/alldata')
-  findAll(userData: DataEntity): Observable<DataEntity[]> {
-    return this.dataService.findAllPosts(userData);
+  async findAll() {
+    const datas: UserData[] = await this.dataService.findAllPosts();
+    return { data: datas, message: 'get all user data' };
+    // return this.dataService.findAllPosts(userData);
   }
+
+  // @Get('user/alldata')
+  // findAll(userData: DataEntity): Observable<DataEntity[], CardsEntity[]> {
+  //   return this.dataService.findAllPosts(userData);
+  // }
 
   // @Post('upload')
   // @UseInterceptors(FileInterceptor('file', saveImageToStorage))

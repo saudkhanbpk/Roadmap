@@ -1,3 +1,4 @@
+import { Card } from 'src/enterfaces/card.model';
 import {
   Column,
   Entity,
@@ -6,12 +7,13 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
+import { BaseEntity } from './base.entity';
 import { LableEntity } from './lable.entity';
 import { TaskEntity } from './taske.entity';
 import { DataEntity } from './userdata.entity';
 
 @Entity('cards')
-export class CardsEntity {
+export class CardsEntity extends BaseEntity implements Card {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -29,23 +31,21 @@ export class CardsEntity {
 
   @OneToMany(() => LableEntity, (LableEntity) => LableEntity.labledata, {
     cascade: true,
+    eager: true,
     onDelete: 'CASCADE',
     nullable: true,
   })
-  @JoinColumn({ name: 'labledId' })
   lable: LableEntity[];
 
   @OneToMany(() => TaskEntity, (TaskEntity) => TaskEntity.taskdata, {
     cascade: true,
+    eager: true,
     onDelete: 'CASCADE',
     nullable: true,
   })
-  @JoinColumn({ name: 'taskId' })
   task: TaskEntity[];
 
-  @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards, {
-    eager: true,
-    nullable: true,
-  })
-  carddata: DataEntity;
+  @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards)
+  @JoinColumn({ name: 'datadId' })
+  userdata: DataEntity;
 }

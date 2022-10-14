@@ -1,8 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Lables } from 'src/enterfaces/lable.model';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { BaseEntity } from './base.entity';
 import { CardsEntity } from './cards.entity';
 
 @Entity('lable')
-export class LableEntity {
+export class LableEntity extends BaseEntity implements Lables {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,9 +20,7 @@ export class LableEntity {
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.lable, {
-    eager: true,
-    nullable: true,
-  })
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.lable)
+  @JoinColumn({ name: 'cardId' })
   labledata: CardsEntity;
 }

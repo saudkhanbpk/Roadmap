@@ -33,6 +33,7 @@ export class UserEntity {
 
   @OneToMany(() => DataEntity, (DataEntity) => DataEntity.author, {
     cascade: true,
+    eager: true,
     onDelete: 'CASCADE',
     nullable: true,
   })

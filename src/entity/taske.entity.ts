@@ -1,7 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Task } from 'src/enterfaces/task.model';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { BaseEntity } from './base.entity';
 import { CardsEntity } from './cards.entity';
 @Entity('task')
-export class TaskEntity {
+export class TaskEntity extends BaseEntity implements Task {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,9 +22,7 @@ export class TaskEntity {
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.task, {
-    eager: true,
-    nullable: true,
-  })
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.task)
+  @JoinColumn({ name: 'cardId' })
   taskdata: CardsEntity;
 }

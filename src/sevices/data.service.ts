@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult, getRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { UserEntity } from 'src/entity/user.entity';
 import { DataEntity } from 'src/entity/userdata.entity';
 import { User } from 'src/enterfaces/user.class';
+import { UserData } from 'src/enterfaces/userdata.model';
+import { userdataDto } from 'src/dtos/userdatdtos';
+import { format } from 'path';
+import { CardsEntity } from 'src/entity/cards.entity';
 
 @Injectable()
 export class DataService {
@@ -25,14 +29,31 @@ export class DataService {
     return from(this.userDataRepository.save(userData));
   }
 
-  updatePost(userData: DataEntity, id: number): Observable<UpdateResult> {
-    // const user: User = new UserEntity();
-    // user.id = id;
-    return from(this.userDataRepository.update(id, userData));
+  updatePost(userData: userdataDto, id: any): Observable<UpdateResult> {
+    // const updatedata: UserData = { userData };
+    // const newdata = this.userDataRepository.update(userData, id);
+    return from(this.userDataRepository.update(userData, id));
   }
 
-  findAllPosts(userdataId: any): Observable<DataEntity[]> {
-    return from(this.userDataRepository.find(userdataId));
+  // updatePost(userData: DataEntity, id: number): Observable<UpdateResult> {
+  //   // const user: User = new UserEntity();
+  //   // user.id = id;
+  //   return from(this.userDataRepository.update(id, userData));
+  // }
+
+  // public async findAllPosts(): Promise<UserData[]> {
+  //   const alluserdata: Repository<DataEntity> = getRepository(DataEntity);
+  //   const Alluserdata: UserData[] = await alluserdata.find();
+  //   return Alluserdata;
+  //   // return from(this.userDataRepository.find(userdataId));
+  // }
+
+  public async findAllPosts(): Promise<UserData[]> {
+    // const alluserdata: Repository<DataEntity> = getRepository(DataEntity);
+    // const userdata: UserData[] = await alluserdata.find();
+    const userdata: UserData[] = await this.userDataRepository.find();
+    return userdata;
+    // return from(this.userDataRepository.find());
   }
 
   findRoadmapById(roadMapId: any): Observable<DataEntity> {
