@@ -68,11 +68,6 @@ export class DataController {
     // return this.dataService.findAllPosts(userData);
   }
 
-  // @Get('user/alldata')
-  // findAll(userData: DataEntity): Observable<DataEntity[], CardsEntity[]> {
-  //   return this.dataService.findAllPosts(userData);
-  // }
-
   // @Post('upload')
   // @UseInterceptors(FileInterceptor('file', saveImageToStorage))
   // uploadImage(

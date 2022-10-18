@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { DeleteResult, Repository, UpdateResult, getRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
@@ -18,10 +18,10 @@ export class DataService {
     @InjectRepository(DataEntity)
     private userDataRepository: Repository<DataEntity>,
   ) {}
-  async create(data: any): Promise<UserEntity> {
+  async create(data: any): Promise<UserData> {
     return this.userRepository.save(data);
   }
-  async findOne(condition: any): Promise<DataEntity> {
+  async findOne(condition: any): Promise<UserData> {
     return this.userDataRepository.findOne(condition);
   }
 
@@ -29,23 +29,39 @@ export class DataService {
     return from(this.userDataRepository.save(userData));
   }
 
-  updatePost(userData: userdataDto, id: any): Observable<UpdateResult> {
-    // const updatedata: UserData = { userData };
-    // const newdata = this.userDataRepository.update(userData, id);
-    return from(this.userDataRepository.update(userData, id));
-  }
-
-  // updatePost(userData: DataEntity, id: number): Observable<UpdateResult> {
-  //   // const user: User = new UserEntity();
-  //   // user.id = id;
-  //   return from(this.userDataRepository.update(id, userData));
+  // async updatePost(userData: userdataDto, id: any): Promise<UserData> {
+  //   // const updatedata: UserData = { userData };
+  //   this.userDataRepository.findOne({ where: { id: id } });
+  //   const updateddata: UserData = { id: id, ...userData };
+  //   const newdata = await this.userDataRepository.save(updateddata);
+  //   return newdata;
   // }
 
-  // public async findAllPosts(): Promise<UserData[]> {
-  //   const alluserdata: Repository<DataEntity> = getRepository(DataEntity);
-  //   const Alluserdata: UserData[] = await alluserdata.find();
-  //   return Alluserdata;
-  //   // return from(this.userDataRepository.find(userdataId));
+  // updatePost(userData: userdataDto, id: number): Promise<UserData> {
+  //   // if (isEmpty(productData)) throw new HttpException(400, "You're not productData");
+  //   // const productRepo: Repository<ProductEntity> = getRepository(ProductEntity);
+  //   // const findProduct: UserData = this.userDataRepository.findOne({
+  //   //   where: { id: id },
+  //   // });
+  //   // if (!findProduct) {
+  //   //   throw new HttpException(`Your product does not exist`, 409);
+  //   // } else {
+  //   // }
+  //    const newdata = this.userDataRepository.update(userData, id);
+  //   const updatecProductData: UserData = {
+  //     id: id,
+  //     ...userData,
+  //     // userId: userId,
+  //   };
+  //   const savedProduct = this.userDataRepository.save(updatecProductData);
+  //   return savedProduct;
+  // }
+
+  updatePost(userData: userdataDto, id: number): Observable<UpdateResult> {
+    return from(this.userDataRepository.update(id, userData));
+  }
+  // updatecard(cardData: CardDto, id: number): Observable<UpdateResult> {
+  //   return from(this.userDataRepository.update(id, userData));
   // }
 
   public async findAllPosts(): Promise<UserData[]> {
@@ -53,7 +69,6 @@ export class DataService {
     // const userdata: UserData[] = await alluserdata.find();
     const userdata: UserData[] = await this.userDataRepository.find();
     return userdata;
-    // return from(this.userDataRepository.find());
   }
 
   findRoadmapById(roadMapId: any): Observable<DataEntity> {
@@ -64,15 +79,6 @@ export class DataService {
   deleteRoadMap(id: number): Observable<DeleteResult> {
     // const apartmentTypeRepo: Repository<UserEntity> = getRepository(CartEntity);
     return from(this.userDataRepository.delete(id));
-
-    // const roadMap: UserData = this.userDataRepository.findOne({
-    //   id: id,
-    // });
-
-    // if (!roadMap)
-    //   throw new HttpException(409, `Apartment Type not found for ${id}`);
-    // this.userDataRepository.delete(id);
-    // return roadMap;
   }
 
   // updateUserImageById(id: number, imagePath: string): Observable<UpdateResult> {

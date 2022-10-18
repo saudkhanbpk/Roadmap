@@ -17,7 +17,7 @@ export class TaskEntity extends BaseEntity implements Task {
   completed: string;
 
   @Column({ default: '' })
-  keyid: string;
+  ik: string;
 
   @Column({ default: '' })
   text: string;

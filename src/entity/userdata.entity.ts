@@ -24,6 +24,9 @@ export class DataEntity extends BaseEntity implements UserData {
   @Column({ default: '' })
   author: string;
 
+  @Column({ default: '' })
+  ik: string;
+
   @OneToMany(() => CardsEntity, (CardsEntity) => CardsEntity.userdata, {
     cascade: true,
     eager: true,

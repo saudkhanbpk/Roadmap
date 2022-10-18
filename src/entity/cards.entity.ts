@@ -21,7 +21,7 @@ export class CardsEntity extends BaseEntity implements Card {
   desc: string;
 
   @Column({ default: '' })
-  keyid: string;
+  ik: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   date: Date;

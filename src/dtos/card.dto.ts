@@ -16,7 +16,7 @@ export class cardDto {
 
   @IsString()
   @IsOptional()
-  keyid: string;
+  ik: string;
 
   @IsString()
   @IsOptional()

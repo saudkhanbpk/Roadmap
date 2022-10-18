@@ -14,6 +14,10 @@ export class taskDto {
 
   @IsString()
   @IsOptional()
+  ik: string;
+
+  @IsString()
+  @IsOptional()
   text: string;
 
   @IsString()
