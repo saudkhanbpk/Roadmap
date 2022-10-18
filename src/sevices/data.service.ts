@@ -9,6 +9,11 @@ import { UserData } from 'src/enterfaces/userdata.model';
 import { userdataDto } from 'src/dtos/userdatdtos';
 import { format } from 'path';
 import { CardsEntity } from 'src/entity/cards.entity';
+import { cardDto } from 'src/dtos/card.dto';
+import { LableEntity } from 'src/entity/lable.entity';
+import { TaskEntity } from 'src/entity/taske.entity';
+import { lableDto } from 'src/dtos/lable.dto';
+import { taskDto } from 'src/dtos/task.dto';
 
 @Injectable()
 export class DataService {
@@ -17,6 +22,12 @@ export class DataService {
     private userRepository: Repository<UserEntity>,
     @InjectRepository(DataEntity)
     private userDataRepository: Repository<DataEntity>,
+    @InjectRepository(CardsEntity)
+    private cardRepository: Repository<CardsEntity>,
+    @InjectRepository(LableEntity)
+    private lableRepository: Repository<LableEntity>,
+    @InjectRepository(TaskEntity)
+    private taskRepository: Repository<TaskEntity>,
   ) {}
   async create(data: any): Promise<UserData> {
     return this.userRepository.save(data);
@@ -60,9 +71,18 @@ export class DataService {
   updatePost(userData: userdataDto, id: number): Observable<UpdateResult> {
     return from(this.userDataRepository.update(id, userData));
   }
-  // updatecard(cardData: CardDto, id: number): Observable<UpdateResult> {
-  //   return from(this.userDataRepository.update(id, userData));
-  // }
+
+  updatecard(cardData: cardDto, id: number): Observable<UpdateResult> {
+    return from(this.cardRepository.update(id, cardData));
+  }
+
+  updatelable(cardData: lableDto, id: number): Observable<UpdateResult> {
+    return from(this.lableRepository.update(id, cardData));
+  }
+
+  updatetask(cardData: taskDto, id: number): Observable<UpdateResult> {
+    return from(this.taskRepository.update(id, cardData));
+  }
 
   public async findAllPosts(): Promise<UserData[]> {
     // const alluserdata: Repository<DataEntity> = getRepository(DataEntity);

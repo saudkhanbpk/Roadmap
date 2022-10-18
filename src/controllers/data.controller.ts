@@ -16,6 +16,9 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { cardDto } from 'src/dtos/card.dto';
+import { lableDto } from 'src/dtos/lable.dto';
+import { taskDto } from 'src/dtos/task.dto';
 import { userdataDto } from 'src/dtos/userdatdtos';
 import { UserData } from 'src/enterfaces/userdata.model';
 import { DataEntity } from 'src/entity/userdata.entity';
@@ -38,8 +41,20 @@ export class DataController {
 
   @Put('user/data/:id')
   update(@Body() userData: userdataDto, @Param('id') id: number) {
-    // console.log('userdata', userData);
     return this.dataService.updatePost(userData, id);
+  }
+  @Put('user/data/card/:id')
+  updatecards(@Body() userData: cardDto, @Param('id') id: number) {
+    return this.dataService.updatecard(userData, id);
+  }
+  @Put('user/data/lable/:id')
+  updatelables(@Body() userData: lableDto, @Param('id') id: number) {
+    return this.dataService.updatelable(userData, id);
+  }
+
+  @Put('user/data/task/:id')
+  updatetasks(@Body() userData: taskDto, @Param('id') id: number) {
+    return this.dataService.updatetask(userData, id);
   }
 
   @Get('/user/data/:id')
