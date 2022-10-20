@@ -1,92 +1,32 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import { DeleteResult, Repository, UpdateResult, getRepository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
-import { UserEntity } from 'src/entity/user.entity';
 import { DataEntity } from 'src/entity/userdata.entity';
-import { User } from 'src/enterfaces/user.class';
 import { UserData } from 'src/enterfaces/userdata.model';
 import { userdataDto } from 'src/dtos/userdatdtos';
-import { format } from 'path';
-import { CardsEntity } from 'src/entity/cards.entity';
-import { cardDto } from 'src/dtos/card.dto';
-import { LableEntity } from 'src/entity/lable.entity';
-import { TaskEntity } from 'src/entity/taske.entity';
-import { lableDto } from 'src/dtos/lable.dto';
-import { taskDto } from 'src/dtos/task.dto';
 
 @Injectable()
 export class DataService {
   constructor(
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
     @InjectRepository(DataEntity)
     private userDataRepository: Repository<DataEntity>,
-    @InjectRepository(CardsEntity)
-    private cardRepository: Repository<CardsEntity>,
-    @InjectRepository(LableEntity)
-    private lableRepository: Repository<LableEntity>,
-    @InjectRepository(TaskEntity)
-    private taskRepository: Repository<TaskEntity>,
   ) {}
-  async create(data: any): Promise<UserData> {
-    return this.userRepository.save(data);
-  }
-  async findOne(condition: any): Promise<UserData> {
-    return this.userDataRepository.findOne(condition);
-  }
-
   creatdate(userData: DataEntity): Observable<DataEntity> {
     return from(this.userDataRepository.save(userData));
   }
 
-  // async updatePost(userData: userdataDto, id: any): Promise<UserData> {
-  //   // const updatedata: UserData = { userData };
-  //   this.userDataRepository.findOne({ where: { id: id } });
-  //   const updateddata: UserData = { id: id, ...userData };
-  //   const newdata = await this.userDataRepository.save(updateddata);
-  //   return newdata;
-  // }
-
-  // updatePost(userData: userdataDto, id: number): Promise<UserData> {
-  //   // if (isEmpty(productData)) throw new HttpException(400, "You're not productData");
-  //   // const productRepo: Repository<ProductEntity> = getRepository(ProductEntity);
-  //   // const findProduct: UserData = this.userDataRepository.findOne({
-  //   //   where: { id: id },
-  //   // });
-  //   // if (!findProduct) {
-  //   //   throw new HttpException(`Your product does not exist`, 409);
-  //   // } else {
-  //   // }
-  //    const newdata = this.userDataRepository.update(userData, id);
-  //   const updatecProductData: UserData = {
-  //     id: id,
-  //     ...userData,
-  //     // userId: userId,
-  //   };
-  //   const savedProduct = this.userDataRepository.save(updatecProductData);
-  //   return savedProduct;
-  // }
-
-  updatePost(userData: userdataDto, id: number): Observable<UpdateResult> {
-    return from(this.userDataRepository.update(id, userData));
-  }
-
-  updatecard(cardData: cardDto, id: number): Observable<UpdateResult> {
-    return from(this.cardRepository.update(id, cardData));
-  }
-
-  updatelable(cardData: lableDto, id: number): Observable<UpdateResult> {
-    return from(this.lableRepository.update(id, cardData));
-  }
-
-  updatetask(cardData: taskDto, id: number): Observable<UpdateResult> {
-    return from(this.taskRepository.update(id, cardData));
+  updatePost(userData: userdataDto, id: number): Promise<UserData> {
+    const updatecProductData: UserData = {
+      id: id,
+      ...userData,
+    };
+    updatecProductData.id = Number(id);
+    const savedProduct = this.userDataRepository.save(updatecProductData);
+    return savedProduct;
   }
 
   public async findAllPosts(): Promise<UserData[]> {
-    // const alluserdata: Repository<DataEntity> = getRepository(DataEntity);
-    // const userdata: UserData[] = await alluserdata.find();
     const userdata: UserData[] = await this.userDataRepository.find();
     return userdata;
   }

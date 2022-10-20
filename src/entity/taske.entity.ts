@@ -6,10 +6,9 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
 import { CardsEntity } from './cards.entity';
 @Entity('task')
-export class TaskEntity extends BaseEntity implements Task {
+export class TaskEntity implements Task {
   @PrimaryGeneratedColumn()
   id: number;
 

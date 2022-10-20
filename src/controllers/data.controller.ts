@@ -5,20 +5,11 @@ import {
   Get,
   HttpCode,
   Param,
-  Patch,
   Post,
   Put,
   Req,
-  Request,
-  UploadedFile,
-  UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { join } from 'path';
-import { map, Observable, of, switchMap } from 'rxjs';
-import { cardDto } from 'src/dtos/card.dto';
-import { lableDto } from 'src/dtos/lable.dto';
-import { taskDto } from 'src/dtos/task.dto';
+import { Observable } from 'rxjs';
 import { userdataDto } from 'src/dtos/userdatdtos';
 import { UserData } from 'src/enterfaces/userdata.model';
 import { DataEntity } from 'src/entity/userdata.entity';
@@ -28,7 +19,7 @@ import { DataEntity } from 'src/entity/userdata.entity';
 //   saveImageToStorage,
 // } from 'src/helpers/image.storage';
 import { DataService } from 'src/sevices/data.service';
-import { DeleteResult, UpdateResult } from 'typeorm';
+import { DeleteResult } from 'typeorm';
 
 @Controller('api')
 export class DataController {
@@ -36,25 +27,13 @@ export class DataController {
 
   @Post('user/data')
   create(@Body() userData: DataEntity) {
-    return this.dataService.creatdate(userData);
+    const newdata = this.dataService.creatdate(userData);
+    return { data: newdata, message: 'New Data added' };
   }
 
   @Put('user/data/:id')
   update(@Body() userData: userdataDto, @Param('id') id: number) {
     return this.dataService.updatePost(userData, id);
-  }
-  @Put('user/data/card/:id')
-  updatecards(@Body() userData: cardDto, @Param('id') id: number) {
-    return this.dataService.updatecard(userData, id);
-  }
-  @Put('user/data/lable/:id')
-  updatelables(@Body() userData: lableDto, @Param('id') id: number) {
-    return this.dataService.updatelable(userData, id);
-  }
-
-  @Put('user/data/task/:id')
-  updatetasks(@Body() userData: taskDto, @Param('id') id: number) {
-    return this.dataService.updatetask(userData, id);
   }
 
   @Get('/user/data/:id')

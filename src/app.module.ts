@@ -25,7 +25,7 @@ import { DataService } from './sevices/data.service';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'roadmap',
+      database: 'drawsql',
       entities: [UserEntity, DataEntity, CardsEntity, TaskEntity, LableEntity],
       synchronize: true,
     }),

@@ -2,7 +2,8 @@
 // import { v4 as uuidv4 } from 'uuid';
 
 // const fs = require('fs');
-// const FileType = require('file-type');
+// import FileType from 'file-type';
+// // const FileType = await import('file-type');
 
 // import path = require('path');
 // import { from, Observable, of } from 'rxjs';

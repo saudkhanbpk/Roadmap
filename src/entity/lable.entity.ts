@@ -6,11 +6,10 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
 import { CardsEntity } from './cards.entity';
 
 @Entity('lable')
-export class LableEntity extends BaseEntity implements Lables {
+export class LableEntity implements Lables {
   @PrimaryGeneratedColumn()
   id: number;
 

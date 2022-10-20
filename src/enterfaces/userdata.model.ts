@@ -1,6 +1,3 @@
-import { Card } from './card.model';
-import { User } from './user.class';
-
 export interface UserData {
   id: number;
   title: string;

@@ -7,13 +7,12 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
 import { LableEntity } from './lable.entity';
 import { TaskEntity } from './taske.entity';
 import { DataEntity } from './userdata.entity';
 
 @Entity('cards')
-export class CardsEntity extends BaseEntity implements Card {
+export class CardsEntity implements Card {
   @PrimaryGeneratedColumn()
   id: number;
 

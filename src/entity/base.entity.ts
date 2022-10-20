@@ -1,11 +1,11 @@
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm';
+// import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-export class BaseEntity {
-  @Column()
-  @CreateDateColumn()
-  createdAt: Date;
+// export class BaseEntity {
+//   @Column()
+//   @CreateDateColumn()
+//   createdAt: Date;
 
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date;
-}
+//   @Column()
+//   @UpdateDateColumn()
+//   updatedAt: Date;
+// }

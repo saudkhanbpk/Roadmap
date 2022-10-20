@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsNumber,
-  IsNotEmpty,
-  IsArray,
-} from 'class-validator';
+import { IsString, IsOptional, IsNotEmpty, IsArray } from 'class-validator';
 import { Attachment, UserData } from 'src/enterfaces/userdata.model';
 
 export class userdataDto implements UserData {

@@ -10,11 +10,11 @@ import {
   Req,
   Res,
   UnauthorizedException,
-  UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('api')
 export class AppController {
@@ -104,12 +104,12 @@ export class AppController {
   //   return this.appService.uploadImageToCloudinary(file);
   // }
 
-  // @Post('images')
-  // @UseInterceptors(FilesInterceptor('profile'))
-  // postAdd(@UploadedFiles() profilexyz: Array<Express.Multer.File>): object {
-  //   console.log(profilexyz);
-  //   return {
-  //     message: 'file uploaded',
-  //   };
-  // }
+  @Post('images')
+  @UseInterceptors(FilesInterceptor('profile'))
+  postAdd(@UploadedFiles() profilexyz: Array<Express.Multer.File>): object {
+    console.log(profilexyz);
+    return {
+      message: 'file uploaded',
+    };
+  }
 }
