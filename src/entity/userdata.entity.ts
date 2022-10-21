@@ -1,6 +1,14 @@
 import { UserData } from 'src/enterfaces/userdata.model';
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { CardsEntity } from './cards.entity';
+import { UserEntity } from './user.entity';
 
 @Entity({ name: 'data' })
 export class DataEntity implements UserData {
@@ -9,9 +17,6 @@ export class DataEntity implements UserData {
 
   @Column({ default: '' })
   title: string;
-
-  @Column({ default: '' })
-  author: string;
 
   @Column({ default: '' })
   ik: string;
@@ -24,10 +29,10 @@ export class DataEntity implements UserData {
   })
   cards: CardsEntity[];
 
-  // @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
-  //   // eager: true,
-  //   nullable: true,
-  // })
-  // @JoinColumn({ name: 'userId' })
-  // author: UserEntity;
+  @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
+    // eager: true,
+    nullable: true,
+  })
+  @JoinColumn({ name: 'userId' })
+  author: UserEntity;
 }

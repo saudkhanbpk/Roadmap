@@ -1,4 +1,5 @@
 import { IsString, IsOptional, IsNotEmpty, IsArray } from 'class-validator';
+import { User } from 'src/enterfaces/user.class';
 import { Attachment, UserData } from 'src/enterfaces/userdata.model';
 
 export class userdataDto implements UserData {
@@ -18,7 +19,7 @@ export class userdataDto implements UserData {
 
   @IsString()
   @IsNotEmpty()
-  public author: string;
+  public author: User;
 
   @IsOptional()
   @IsArray()

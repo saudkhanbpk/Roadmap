@@ -4,6 +4,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 // import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { DataController } from './controllers/data.controller';
 import { CardsEntity } from './entity/cards.entity';
@@ -12,13 +13,17 @@ import { TaskEntity } from './entity/taske.entity';
 import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
 import { DataService } from './sevices/data.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    // CloudinaryModule,
-    MulterModule.register({
-      dest: './images',
+    CloudinaryModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
     }),
+    // MulterModule.register({
+    //   dest: './images',
+    // }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'database-1.ce6hdwvgho07.ap-northeast-1.rds.amazonaws.com',

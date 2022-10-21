@@ -1,8 +1,9 @@
+import { User } from './user.class';
 export interface UserData {
   id: number;
   title: string;
   ik: string;
-  author: string;
+  author: User;
 }
 
 export interface Attachment {
