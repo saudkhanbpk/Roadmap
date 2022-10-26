@@ -14,6 +14,7 @@ import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
 import { DataService } from './sevices/data.service';
 import { ConfigModule } from '@nestjs/config';
+import { MemberEntity } from './entity/members.entity';
 
 @Module({
   imports: [
@@ -30,8 +31,15 @@ import { ConfigModule } from '@nestjs/config';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'drawsql',
-      entities: [UserEntity, DataEntity, CardsEntity, TaskEntity, LableEntity],
+      database: 'Nestjs',
+      entities: [
+        UserEntity,
+        DataEntity,
+        CardsEntity,
+        TaskEntity,
+        LableEntity,
+        MemberEntity,
+      ],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([
@@ -40,6 +48,7 @@ import { ConfigModule } from '@nestjs/config';
       CardsEntity,
       TaskEntity,
       LableEntity,
+      MemberEntity,
     ]),
     JwtModule.register({
       secret: 'secret',

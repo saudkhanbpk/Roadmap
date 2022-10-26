@@ -4,5 +4,8 @@ export interface Task {
   completed: string;
   text: string;
   ik: string;
+  deadline: string;
+  created_by: string;
+  comments: string[];
   taskdata: Card;
 }

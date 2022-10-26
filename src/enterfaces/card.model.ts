@@ -4,7 +4,7 @@ export interface Card {
   id: number;
   desc: string;
   ik: string;
-  date: Date;
+  date: string;
   userdata: UserData;
   title: string;
 }
