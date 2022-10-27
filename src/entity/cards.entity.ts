@@ -19,8 +19,8 @@ export class CardsEntity implements Card {
   @Column({ default: '' })
   desc: string;
 
-  @Column({ default: '' })
-  ik: string;
+  // @Column({ default: '' })
+  // ik: string;
 
   @Column({ default: '' })
   date: string;
@@ -34,7 +34,7 @@ export class CardsEntity implements Card {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  lable: LableEntity[];
+  labels: LableEntity[];
 
   @OneToMany(() => TaskEntity, (TaskEntity) => TaskEntity.taskdata, {
     cascade: true,
@@ -42,7 +42,7 @@ export class CardsEntity implements Card {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  task: TaskEntity[];
+  tasks: TaskEntity[];
 
   @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards)
   @JoinColumn({ name: 'datadId' })

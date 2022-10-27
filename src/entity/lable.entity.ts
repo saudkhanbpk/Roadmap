@@ -19,7 +19,7 @@ export class LableEntity implements Lables {
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.lable)
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.labels)
   @JoinColumn({ name: 'cardId' })
   labledata: CardsEntity;
 }

@@ -14,9 +14,9 @@ export class cardDto {
   @IsOptional()
   desc: string;
 
-  @IsString()
-  @IsOptional()
-  ik: string;
+  // @IsString()
+  // @IsOptional()
+  // ik: string;
 
   @IsString()
   @IsOptional()
@@ -24,11 +24,11 @@ export class cardDto {
 
   @IsOptional()
   @IsArray()
-  lable: Lables[];
+  labels: Lables[];
 
   @IsOptional()
   @IsArray()
-  task: Task[];
+  tasks: Task[];
 
   /*   @IsOptional()
   name: string; */

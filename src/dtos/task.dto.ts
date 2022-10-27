@@ -13,9 +13,9 @@ export class taskDto {
   @IsOptional()
   completed: string;
 
-  @IsString()
-  @IsOptional()
-  ik: string;
+  // @IsString()
+  // @IsOptional()
+  // ik: string;
 
   @IsString()
   @IsOptional()
@@ -40,7 +40,7 @@ export class taskDto {
 
   @IsOptional()
   @IsArray()
-  task: Member[];
+  tasks: Member[];
 
   /*   @IsOptional()
     name: string; */

@@ -17,8 +17,8 @@ export class TaskEntity implements Task {
   @Column({ default: '' })
   completed: string;
 
-  @Column({ default: '' })
-  ik: string;
+  // @Column({ default: '' })
+  // ik: string;
 
   @Column({ default: '' })
   text: string;
@@ -32,7 +32,7 @@ export class TaskEntity implements Task {
   @Column('text', { array: true, nullable: true })
   comments: string[];
 
-  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.task)
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.tasks)
   @JoinColumn({ name: 'cardId' })
   taskdata: CardsEntity;
 

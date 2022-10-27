@@ -2,7 +2,7 @@ import { Board } from './board.model';
 export interface UserData {
   id: number;
   title: string;
-  ik: string;
+  // ik: string;
   boardsdata: Board;
 }
 

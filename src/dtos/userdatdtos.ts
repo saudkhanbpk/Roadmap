@@ -14,9 +14,9 @@ export class userdataDto implements UserData {
   @IsNotEmpty()
   public title: string;
 
-  @IsString()
-  @IsNotEmpty()
-  public ik: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // public ik: string;
 
   @IsString()
   @IsNotEmpty()

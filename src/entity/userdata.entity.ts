@@ -18,8 +18,8 @@ export class DataEntity implements UserData {
   @Column({ default: '' })
   title: string;
 
-  @Column({ default: '' })
-  ik: string;
+  // @Column({ default: '' })
+  // ik: string;
 
   @OneToMany(() => CardsEntity, (CardsEntity) => CardsEntity.userdata, {
     cascade: true,

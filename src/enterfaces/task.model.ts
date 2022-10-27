@@ -3,7 +3,7 @@ export interface Task {
   id: number;
   completed: string;
   text: string;
-  ik: string;
+  // ik: string;
   deadline: string;
   created_by: string;
   comments: string[];
