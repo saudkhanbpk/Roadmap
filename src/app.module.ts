@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { MulterModule } from '@nestjs/platform-express';
+// import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -15,6 +15,7 @@ import { DataEntity } from './entity/userdata.entity';
 import { DataService } from './sevices/data.service';
 import { ConfigModule } from '@nestjs/config';
 import { MemberEntity } from './entity/members.entity';
+import { BoardsEntity } from './entity/board.entity';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { MemberEntity } from './entity/members.entity';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'Nestjs',
+      database: 'roadmap',
       entities: [
         UserEntity,
         DataEntity,
@@ -39,6 +40,7 @@ import { MemberEntity } from './entity/members.entity';
         TaskEntity,
         LableEntity,
         MemberEntity,
+        BoardsEntity,
       ],
       synchronize: true,
     }),
@@ -49,6 +51,7 @@ import { MemberEntity } from './entity/members.entity';
       TaskEntity,
       LableEntity,
       MemberEntity,
+      BoardsEntity,
     ]),
     JwtModule.register({
       secret: 'secret',

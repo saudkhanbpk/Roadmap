@@ -2,7 +2,6 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entity/user.entity';
-import { DataEntity } from './entity/userdata.entity';
 import { CloudinaryService } from './cloudinary/cloudinary.service';
 
 @Injectable()
@@ -11,8 +10,6 @@ export class AppService {
     private cloudinary: CloudinaryService,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
-    @InjectRepository(DataEntity)
-    private userDataRepository: Repository<DataEntity>,
   ) {}
   async create(data: any): Promise<UserEntity> {
     return this.userRepository.save(data);

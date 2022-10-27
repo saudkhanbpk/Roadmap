@@ -25,9 +25,6 @@ export class CardsEntity implements Card {
   @Column({ default: '' })
   date: string;
 
-  // @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  // date: Date;
-
   @Column({ default: '' })
   title: string;
 

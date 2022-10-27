@@ -2,22 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
-import { DataEntity } from 'src/entity/userdata.entity';
-import { UserData } from 'src/enterfaces/userdata.model';
-import { userdataDto } from 'src/dtos/userdatdtos';
+import { BoardsEntity } from 'src/entity/board.entity';
+import { Board } from 'src/enterfaces/board.model';
+import { BoardsDto } from 'src/dtos/boarddto';
 
 @Injectable()
 export class DataService {
   constructor(
-    @InjectRepository(DataEntity)
-    private userDataRepository: Repository<DataEntity>,
+    @InjectRepository(BoardsEntity)
+    private userDataRepository: Repository<BoardsEntity>,
   ) {}
-  creatdate(userData: DataEntity): Observable<DataEntity> {
+  creatdate(userData: BoardsEntity): Observable<BoardsEntity> {
     return from(this.userDataRepository.save(userData));
   }
 
-  updatePost(userData: userdataDto, id: number): Promise<UserData> {
-    const updatecProductData: UserData = {
+  updatePost(userData: BoardsDto, id: number): Promise<Board> {
+    const updatecProductData: Board = {
       id: id,
       ...userData,
     };
@@ -26,12 +26,12 @@ export class DataService {
     return savedProduct;
   }
 
-  public async findAllPosts(): Promise<UserData[]> {
-    const userdata: UserData[] = await this.userDataRepository.find();
+  public async findAllPosts(): Promise<Board[]> {
+    const userdata: Board[] = await this.userDataRepository.find();
     return userdata;
   }
 
-  findRoadmapById(roadMapId: any): Observable<DataEntity> {
+  findRoadmapById(roadMapId: any): Observable<BoardsEntity> {
     // return from(this.userDataRepository.findOne(roadMapId));
     return from(this.userDataRepository.findOne({ where: { id: roadMapId } }));
   }

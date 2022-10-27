@@ -10,9 +10,9 @@ import {
   Req,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { userdataDto } from 'src/dtos/userdatdtos';
-import { UserData } from 'src/enterfaces/userdata.model';
-import { DataEntity } from 'src/entity/userdata.entity';
+import { BoardsDto } from 'src/dtos/boarddto';
+import { Board } from 'src/enterfaces/board.model';
+import { BoardsEntity } from 'src/entity/board.entity';
 // import {
 //   isFileExtensionSafe,
 //   removeFile,
@@ -26,13 +26,13 @@ export class DataController {
   constructor(private dataService: DataService) {}
 
   @Post('user/data')
-  create(@Body() userData: DataEntity) {
+  create(@Body() userData: BoardsEntity) {
     const newdata = this.dataService.creatdate(userData);
     return { data: newdata, message: 'New Data added' };
   }
 
   @Put('user/data/:id')
-  update(@Body() userData: userdataDto, @Param('id') id: number) {
+  update(@Body() userData: BoardsDto, @Param('id') id: number) {
     return this.dataService.updatePost(userData, id);
   }
 
@@ -40,9 +40,8 @@ export class DataController {
   @HttpCode(200)
   async getRoadmapById(
     @Req() @Param('id') id: number,
-  ): Promise<Observable<DataEntity>> {
+  ): Promise<Observable<BoardsEntity>> {
     return this.dataService.findRoadmapById(id);
-    // return { data: deleteResponse, message: 'delete object' };
   }
 
   @Delete('/user/data/:id')
@@ -52,14 +51,12 @@ export class DataController {
     @Req() @Param('id') id: number,
   ): Promise<Observable<DeleteResult>> {
     return this.dataService.deleteRoadMap(id);
-    // return { data: deleteResponse, message: 'delete object' };
   }
 
   @Get('user/alldata')
   async findAll() {
-    const datas: UserData[] = await this.dataService.findAllPosts();
+    const datas: Board[] = await this.dataService.findAllPosts();
     return { data: datas, message: 'get all user data' };
-    // return this.dataService.findAllPosts(userData);
   }
 
   // @Post('upload')

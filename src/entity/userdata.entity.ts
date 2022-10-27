@@ -7,8 +7,8 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
+import { BoardsEntity } from './board.entity';
 import { CardsEntity } from './cards.entity';
-import { UserEntity } from './user.entity';
 
 @Entity({ name: 'data' })
 export class DataEntity implements UserData {
@@ -29,10 +29,7 @@ export class DataEntity implements UserData {
   })
   cards: CardsEntity[];
 
-  @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
-    // eager: true,
-    nullable: true,
-  })
-  @JoinColumn({ name: 'userId' })
-  author: UserEntity;
+  @ManyToOne(() => BoardsEntity, (BoardsEntity) => BoardsEntity.boards)
+  @JoinColumn({ name: 'boardsdId' })
+  boardsdata: BoardsEntity;
 }
