@@ -1,8 +1,8 @@
 import { Board } from './board.model';
 export interface UserData {
-  id: number;
+  key: number;
   title: string;
-  // ik: string;
+  id: string;
   boardsdata: Board;
 }
 

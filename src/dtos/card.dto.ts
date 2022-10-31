@@ -5,7 +5,7 @@ import { UserData } from 'src/enterfaces/userdata.model';
 
 export class cardDto {
   @IsOptional()
-  id: number;
+  key: number;
 
   @IsOptional()
   project: UserData;
@@ -14,9 +14,9 @@ export class cardDto {
   @IsOptional()
   desc: string;
 
-  // @IsString()
-  // @IsOptional()
-  // ik: string;
+  @IsString()
+  @IsOptional()
+  id: string;
 
   @IsString()
   @IsOptional()

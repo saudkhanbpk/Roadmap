@@ -3,7 +3,10 @@ import { Card } from 'src/enterfaces/card.model';
 
 export class lableDto {
   @IsOptional()
-  id: number;
+  key: number;
+
+  @IsOptional()
+  id: string;
 
   @IsOptional()
   project: Card;

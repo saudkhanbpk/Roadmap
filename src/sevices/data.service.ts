@@ -36,9 +36,9 @@ export class DataService {
     return from(this.userDataRepository.findOne({ where: { id: roadMapId } }));
   }
 
-  deleteRoadMap(id: number): Observable<DeleteResult> {
+  deleteRoadMap(key: number): Observable<DeleteResult> {
     // const apartmentTypeRepo: Repository<UserEntity> = getRepository(CartEntity);
-    return from(this.userDataRepository.delete(id));
+    return from(this.userDataRepository.delete(key));
   }
 
   // updateUserImageById(id: number, imagePath: string): Observable<UpdateResult> {

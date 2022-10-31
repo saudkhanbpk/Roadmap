@@ -32,7 +32,7 @@ import { BoardsEntity } from './entity/board.entity';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'roadmap',
+      database: 'Nestjs',
       entities: [
         UserEntity,
         DataEntity,

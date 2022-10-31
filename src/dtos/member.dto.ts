@@ -3,7 +3,10 @@ import { Task } from 'src/enterfaces/task.model';
 
 export class MemberDto {
   @IsOptional()
-  id: number;
+  key: number;
+
+  @IsOptional()
+  id: string;
 
   @IsOptional()
   project: Task;

@@ -10,12 +10,15 @@ import { TaskEntity } from './taske.entity';
 @Entity('members')
 export class MemberEntity implements Member {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
+
+  @Column({ default: '' })
+  id: string;
 
   @Column({ default: '' })
   name: string;
 
   @ManyToOne(() => TaskEntity, (taskEntity) => taskEntity.members)
-  @JoinColumn({ name: 'TaskId' })
+  @JoinColumn({ name: 'taskKey' })
   memberdata: TaskEntity;
 }

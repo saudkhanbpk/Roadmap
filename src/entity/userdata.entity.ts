@@ -13,13 +13,13 @@ import { CardsEntity } from './cards.entity';
 @Entity({ name: 'data' })
 export class DataEntity implements UserData {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
 
   @Column({ default: '' })
   title: string;
 
-  // @Column({ default: '' })
-  // ik: string;
+  @Column({ default: '' })
+  id: string;
 
   @OneToMany(() => CardsEntity, (CardsEntity) => CardsEntity.userdata, {
     cascade: true,
@@ -30,6 +30,6 @@ export class DataEntity implements UserData {
   cards: CardsEntity[];
 
   @ManyToOne(() => BoardsEntity, (BoardsEntity) => BoardsEntity.boards)
-  @JoinColumn({ name: 'boardsdId' })
+  @JoinColumn({ name: 'boardsKey' })
   boardsdata: BoardsEntity;
 }

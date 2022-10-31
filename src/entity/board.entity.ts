@@ -16,14 +16,24 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  Column,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { DataEntity } from './userdata.entity';
 
-@Entity('Boards')
+@Entity('boards')
 export class BoardsEntity implements Board {
   @PrimaryGeneratedColumn()
   id: number;
+
+  // @Column({ default: '' })
+  // id: string;
+
+  @Column({ default: '' })
+  title: string;
+
+  @Column({ default: '' })
+  description: string;
 
   @OneToMany(() => DataEntity, (dataEntity) => dataEntity.boardsdata, {
     cascade: true,

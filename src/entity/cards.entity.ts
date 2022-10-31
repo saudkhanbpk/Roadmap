@@ -14,13 +14,13 @@ import { DataEntity } from './userdata.entity';
 @Entity('cards')
 export class CardsEntity implements Card {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
 
   @Column({ default: '' })
   desc: string;
 
-  // @Column({ default: '' })
-  // ik: string;
+  @Column({ default: '' })
+  id: string;
 
   @Column({ default: '' })
   date: string;
@@ -45,6 +45,6 @@ export class CardsEntity implements Card {
   tasks: TaskEntity[];
 
   @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards)
-  @JoinColumn({ name: 'datadId' })
+  @JoinColumn({ name: 'dataKey' })
   userdata: DataEntity;
 }

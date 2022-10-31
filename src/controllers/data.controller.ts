@@ -4,6 +4,8 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -41,7 +43,11 @@ export class DataController {
   async getRoadmapById(
     @Req() @Param('id') id: number,
   ): Promise<Observable<BoardsEntity>> {
-    return this.dataService.findRoadmapById(id);
+    const update = this.dataService.findRoadmapById(id);
+    if (!id) {
+      throw new HttpException('ID not Found. Try another', HttpStatus.CONFLICT);
+    }
+    return update;
   }
 
   @Delete('/user/data/:id')

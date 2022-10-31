@@ -12,13 +12,13 @@ import { MemberEntity } from './members.entity';
 @Entity('task')
 export class TaskEntity implements Task {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
 
   @Column({ default: '' })
   completed: string;
 
-  // @Column({ default: '' })
-  // ik: string;
+  @Column({ default: '' })
+  id: string;
 
   @Column({ default: '' })
   text: string;
@@ -33,7 +33,7 @@ export class TaskEntity implements Task {
   comments: string[];
 
   @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.tasks)
-  @JoinColumn({ name: 'cardId' })
+  @JoinColumn({ name: 'cardsKey' })
   taskdata: CardsEntity;
 
   @OneToMany(() => MemberEntity, (memberEntity) => memberEntity.memberdata, {

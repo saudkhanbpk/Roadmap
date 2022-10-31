@@ -4,7 +4,7 @@ import { Member } from 'src/enterfaces/member.model';
 
 export class taskDto {
   @IsOptional()
-  id: number;
+  key: number;
 
   @IsOptional()
   project: Card;
@@ -13,9 +13,9 @@ export class taskDto {
   @IsOptional()
   completed: string;
 
-  // @IsString()
-  // @IsOptional()
-  // ik: string;
+  @IsString()
+  @IsOptional()
+  id: string;
 
   @IsString()
   @IsOptional()

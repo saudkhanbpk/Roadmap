@@ -1,6 +1,7 @@
 import { Task } from './task.model';
 export interface Member {
-  id: number;
+  key: number;
+  id: string;
   name: string;
   memberdata: Task;
 }

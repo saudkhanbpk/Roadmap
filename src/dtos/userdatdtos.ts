@@ -5,7 +5,7 @@ import { Attachment, UserData } from 'src/enterfaces/userdata.model';
 
 export class userdataDto implements UserData {
   @IsOptional()
-  id: number;
+  key: number;
 
   @IsOptional()
   userId: number;
@@ -14,9 +14,9 @@ export class userdataDto implements UserData {
   @IsNotEmpty()
   public title: string;
 
-  // @IsString()
-  // @IsNotEmpty()
-  // public ik: string;
+  @IsString()
+  @IsNotEmpty()
+  id: string;
 
   @IsString()
   @IsNotEmpty()

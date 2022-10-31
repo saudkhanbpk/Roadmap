@@ -1,6 +1,7 @@
 import { Card } from './card.model';
 export interface Lables {
-  id: number;
+  key: number;
+  id: string;
   color: string;
   text: string;
   labledata: Card;

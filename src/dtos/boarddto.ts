@@ -7,6 +7,15 @@ export class BoardsDto implements Board {
   @IsOptional()
   id: number;
 
+  // @IsOptional()
+  // id: string;
+
+  @IsOptional()
+  title: string;
+
+  @IsOptional()
+  description: string;
+
   @IsString()
   @IsNotEmpty()
   public author: User;
