@@ -16,6 +16,9 @@ import { DataService } from './sevices/data.service';
 import { ConfigModule } from '@nestjs/config';
 import { MemberEntity } from './entity/members.entity';
 import { BoardsEntity } from './entity/board.entity';
+import { ResumeController } from './controllers/resume.controller';
+import { ResumeService } from './sevices/resume.service';
+import { ResumeEntity } from './entity/resume.entity';
 
 @Module({
   imports: [
@@ -41,6 +44,7 @@ import { BoardsEntity } from './entity/board.entity';
         LableEntity,
         MemberEntity,
         BoardsEntity,
+        ResumeEntity,
       ],
       synchronize: true,
     }),
@@ -52,13 +56,14 @@ import { BoardsEntity } from './entity/board.entity';
       LableEntity,
       MemberEntity,
       BoardsEntity,
+      ResumeEntity,
     ]),
     JwtModule.register({
       secret: 'secret',
       signOptions: { expiresIn: '1d' },
     }),
   ],
-  controllers: [AppController, DataController],
-  providers: [AppService, DataService],
+  controllers: [AppController, DataController, ResumeController],
+  providers: [AppService, DataService, ResumeService],
 })
 export class AppModule {}
