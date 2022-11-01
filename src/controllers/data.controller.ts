@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  Param,
-  Post,
-  Put,
-  Req,
-} from '@nestjs/common';
+import {Body,Controller,Delete, Get,HttpCode, Param,Post,Put,Req,} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { userdataDto } from 'src/dtos/userdatdtos';
 import { UserData } from 'src/enterfaces/userdata.model';
@@ -20,10 +10,11 @@ import { DataEntity } from 'src/entity/userdata.entity';
 // } from 'src/helpers/image.storage';
 import { DataService } from 'src/sevices/data.service';
 import { DeleteResult } from 'typeorm';
+import { MailerService } from '@nestjs-modules/mailer/dist';
 
 @Controller('api')
 export class DataController {
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService,private mailService: MailerService) {}
 
   @Post('user/data')
   create(@Body() userData: DataEntity) {
@@ -61,6 +52,22 @@ export class DataController {
     return { data: datas, message: 'get all user data' };
     // return this.dataService.findAllPosts(userData);
   }
+
+  @Post('send-email')
+  async sendEmail(@Body() body: any) {
+    const { email, subject, message } = body;
+    await this.mailService.sendMail({
+      to: email,
+      from: 'khan@gmail.com',
+      subject: subject,
+      text: message,
+      html: `<b>${message}</b>`,
+    });
+    return { message: 'Email sent successfully' };
+  }
+
+
+
 
   // @Post('upload')
   // @UseInterceptors(FileInterceptor('file', saveImageToStorage))

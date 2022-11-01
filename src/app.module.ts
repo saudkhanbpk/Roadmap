@@ -14,10 +14,23 @@ import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
 import { DataService } from './sevices/data.service';
 import { ConfigModule } from '@nestjs/config';
-
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 @Module({
   imports: [
     CloudinaryModule,
+    MailerModule.forRoot({
+      transport: {
+        service: "gmail",
+        auth: {
+          user: "khannihar921@gmail.com",
+          pass: "hpgkjinzqtgguoof"
+        }
+      }
+    }),
+    EventEmitterModule.forRoot(),
+
+
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
