@@ -9,7 +9,7 @@ import { ContentI } from 'src/enterfaces/content.model';
 @Injectable()
 export class ContentService {
   constructor(
-    @InjectRepository(BoardsEntity)
+    @InjectRepository(ContentEntity)
     private contentRepo: Repository<ContentEntity>,
   ) {}
 
