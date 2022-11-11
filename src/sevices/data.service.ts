@@ -5,6 +5,8 @@ import { from, Observable } from 'rxjs';
 import { BoardsEntity } from 'src/entity/board.entity';
 import { Board } from 'src/enterfaces/board.model';
 import { BoardsDto } from 'src/dtos/boarddto';
+import { ContentEntity } from 'src/entity/content.entity';
+import { ContentI } from 'src/enterfaces/content.model';
 
 @Injectable()
 export class DataService {
