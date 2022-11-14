@@ -20,6 +20,9 @@ export class BoardsDto implements Board {
   @IsNotEmpty()
   public author: User;
 
+  @IsString()
+  userId: string;
+
   @IsOptional()
   @IsArray()
   boards: UserData[];
