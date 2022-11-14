@@ -35,8 +35,9 @@ export class DataController {
 
   @Post('user/data')
   create(@Body() userData: BoardsEntity) {
-    const newdata = this.dataService.creatdate(userData);
-    return { data: newdata, message: 'New Data added' };
+    // const newdata = this.dataService.createProject(userData);
+    // return { data: newdata, message: 'New Data added' };
+    return this.dataService.createProject(userData);
   }
 
   @Put('user/data/:id')
