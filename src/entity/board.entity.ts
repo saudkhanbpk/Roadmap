@@ -26,8 +26,8 @@ export class BoardsEntity implements Board {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @Column({ default: '' })
-  // id: string;
+  @Column({ default: '' })
+  userId?: number;
 
   @Column({ default: '' })
   title: string;
