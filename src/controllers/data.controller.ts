@@ -28,9 +28,9 @@ export class DataController {
   constructor(private dataService: DataService) {}
 
   @Post('user/data')
-  create(@Body() userData: BoardsEntity) {
-    const newdata = this.dataService.creatdate(userData);
-    return { data: newdata, message: 'New Data added' };
+  async create(@Body() userData: BoardsDto) {
+    const data = await this.dataService.creatdate(userData);
+    return { data: data.id, message: 'New Data added' };
   }
 
   @Put('user/data/:id')

@@ -7,3 +7,8 @@ export interface Board {
   description: string;
   author: User;
 }
+
+export enum Type {
+  private = 'private',
+  public = 'public',
+}

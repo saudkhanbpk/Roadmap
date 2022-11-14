@@ -1,9 +1,9 @@
 import { IsString, IsOptional, IsNotEmpty, IsArray } from 'class-validator';
 import { Board } from 'src/enterfaces/board.model';
 import { User } from 'src/enterfaces/user.class';
-import { Attachment, UserData } from 'src/enterfaces/userdata.model';
+import { Attachment, Columns } from 'src/enterfaces/userdata.model';
 
-export class userdataDto implements UserData {
+export class userdataDto implements Columns {
   @IsOptional()
   key: number;
 
