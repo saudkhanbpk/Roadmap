@@ -8,3 +8,8 @@ export interface Board {
   author: User;
   userId?: number;
 }
+
+export enum Type {
+  private = 'private',
+  public = 'public',
+}

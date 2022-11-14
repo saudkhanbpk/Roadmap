@@ -44,7 +44,9 @@ export class CardsEntity implements Card {
   })
   tasks: TaskEntity[];
 
-  @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards)
-  @JoinColumn({ name: 'dataKey' })
+  @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'columnKey' })
   userdata: DataEntity;
 }

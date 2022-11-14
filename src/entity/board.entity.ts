@@ -9,7 +9,7 @@
 //   @UpdateDateColumn()
 //   updatedAt: Date;
 // }
-import { Board } from 'src/enterfaces/board.model';
+import { Board, Type } from 'src/enterfaces/board.model';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -34,6 +34,9 @@ export class BoardsEntity implements Board {
 
   @Column({ default: '' })
   description: string;
+
+  @Column({ type: 'enum', enum: Type, default: Type.public })
+  type: Type;
 
   @OneToMany(() => DataEntity, (dataEntity) => dataEntity.boardsdata, {
     cascade: true,

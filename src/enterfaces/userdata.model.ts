@@ -1,5 +1,5 @@
 import { Board } from './board.model';
-export interface UserData {
+export interface Columns {
   key: number;
   title: string;
   id: string;
@@ -8,7 +8,7 @@ export interface UserData {
 
 export interface Attachment {
   id: number;
-  userdata: UserData;
+  userdata: Columns;
   key: string;
   url: string;
 }

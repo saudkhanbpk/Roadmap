@@ -37,7 +37,7 @@ import { ContentService } from './sevices/content.service';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'Nestjs',
+      database: 'roadmap',
       entities: [
         UserEntity,
         DataEntity,

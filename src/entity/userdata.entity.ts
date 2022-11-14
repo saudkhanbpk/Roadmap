@@ -1,4 +1,4 @@
-import { UserData } from 'src/enterfaces/userdata.model';
+import { Columns } from 'src/enterfaces/userdata.model';
 import {
   Column,
   Entity,
@@ -10,8 +10,8 @@ import {
 import { BoardsEntity } from './board.entity';
 import { CardsEntity } from './cards.entity';
 
-@Entity({ name: 'data' })
-export class DataEntity implements UserData {
+@Entity({ name: 'column' })
+export class DataEntity implements Columns {
   @PrimaryGeneratedColumn()
   key: number;
 
@@ -29,7 +29,10 @@ export class DataEntity implements UserData {
   })
   cards: CardsEntity[];
 
-  @ManyToOne(() => BoardsEntity, (BoardsEntity) => BoardsEntity.boards)
-  @JoinColumn({ name: 'boardsKey' })
+  @ManyToOne(() => BoardsEntity, {
+    // onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn({ name: 'boardsId' })
   boardsdata: BoardsEntity;
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Res } from '@nestjs/common';
 import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
@@ -14,9 +14,9 @@ export class DataService {
     @InjectRepository(BoardsEntity)
     private userDataRepository: Repository<BoardsEntity>,
   ) {}
-
-  creatdate(userData: BoardsEntity): Observable<BoardsEntity> {
-    return from(this.userDataRepository.save(userData));
+  async creatdate(userData: BoardsDto): Promise<Board> {
+    const boards = await this.userDataRepository.save(userData);
+    return boards;
   }
 
   createProject(userData: BoardsEntity): Promise<Board> {
@@ -44,9 +44,10 @@ export class DataService {
     return from(this.userDataRepository.findOne({ where: { id: roadMapId } }));
   }
 
-  deleteRoadMap(key: number): Observable<DeleteResult> {
+  deleteRoadMap(id: number): Observable<DeleteResult> {
     // const apartmentTypeRepo: Repository<UserEntity> = getRepository(CartEntity);
-    return from(this.userDataRepository.delete(key));
+    console.log(id, ': id');
+    return from(this.userDataRepository.delete(id));
   }
 
   // updateUserImageById(id: number, imagePath: string): Observable<UpdateResult> {
