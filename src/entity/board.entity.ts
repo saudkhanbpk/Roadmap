@@ -26,7 +26,7 @@ export class BoardsEntity implements Board {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: '' })
+  @Column({ nullable: true })
   userId?: number;
 
   @Column({ default: '' })
@@ -47,6 +47,6 @@ export class BoardsEntity implements Board {
     // eager: true,
     nullable: true,
   })
-  @JoinColumn({ name: 'userId' })
+  @JoinColumn({ name: 'authorId' })
   author: UserEntity;
 }
