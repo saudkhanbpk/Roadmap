@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { BoardsEntity } from './board.entity';
+import { MemberEntity } from './members.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -38,4 +39,12 @@ export class UserEntity {
     nullable: true,
   })
   userdata: BoardsEntity[];
+
+  @OneToMany(() => MemberEntity, (memberEntity) => memberEntity.author, {
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  membersuser: MemberEntity[];
 }
