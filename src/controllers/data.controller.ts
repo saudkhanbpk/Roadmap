@@ -14,7 +14,10 @@ import {
 import { Observable } from 'rxjs';
 import { BoardsDto } from 'src/dtos/boarddto';
 import { Board } from 'src/enterfaces/board.model';
+import { ContentI } from 'src/enterfaces/content.model';
 import { BoardsEntity } from 'src/entity/board.entity';
+import { ContentEntity } from 'src/entity/content.entity';
+import { ContentService } from 'src/sevices/content.service';
 // import {
 //   isFileExtensionSafe,
 //   removeFile,
@@ -25,12 +28,16 @@ import { DeleteResult } from 'typeorm';
 
 @Controller('api')
 export class DataController {
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private contentService: ContentService,
+  ) {}
 
   @Post('user/data')
-  async create(@Body() userData: BoardsDto) {
-    const data = await this.dataService.creatdate(userData);
-    return { data: data.id, message: 'New Data added' };
+  create(@Body() userData: BoardsEntity) {
+    // const newdata = this.dataService.createProject(userData);
+    // return { data: newdata, message: 'New Data added' };
+    return this.dataService.createProject(userData);
   }
 
   @Put('user/data/:id')
@@ -63,6 +70,18 @@ export class DataController {
   async findAll() {
     const datas: Board[] = await this.dataService.findAllPosts();
     return { data: datas, message: 'get all user data' };
+  }
+
+  @Post('create/content')
+  createContent(@Body() content: ContentEntity) {
+    const newdata = this.contentService.createContent(content);
+    return { data: newdata, message: 'New Data added' };
+  }
+
+  @Get('getAll/content')
+  async getAllContent() {
+    const datas: ContentI[] = await this.contentService.getAllContent();
+    return { data: datas, message: 'get all Contents' };
   }
 
   // @Post('upload')

@@ -19,6 +19,8 @@ import { BoardsEntity } from './entity/board.entity';
 import { ResumeController } from './controllers/resume.controller';
 import { ResumeService } from './sevices/resume.service';
 import { ResumeEntity } from './entity/resume.entity';
+import { ContentEntity } from './entity/content.entity';
+import { ContentService } from './sevices/content.service';
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { ResumeEntity } from './entity/resume.entity';
         MemberEntity,
         BoardsEntity,
         ResumeEntity,
+        ContentEntity,
       ],
       synchronize: true,
     }),
@@ -57,6 +60,7 @@ import { ResumeEntity } from './entity/resume.entity';
       MemberEntity,
       BoardsEntity,
       ResumeEntity,
+      ContentEntity,
     ]),
     JwtModule.register({
       secret: 'secret',
@@ -64,6 +68,6 @@ import { ResumeEntity } from './entity/resume.entity';
     }),
   ],
   controllers: [AppController, DataController, ResumeController],
-  providers: [AppService, DataService, ResumeService],
+  providers: [AppService, DataService, ResumeService, ContentService],
 })
 export class AppModule {}

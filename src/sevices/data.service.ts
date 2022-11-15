@@ -5,6 +5,8 @@ import { from, Observable } from 'rxjs';
 import { BoardsEntity } from 'src/entity/board.entity';
 import { Board } from 'src/enterfaces/board.model';
 import { BoardsDto } from 'src/dtos/boarddto';
+import { ContentEntity } from 'src/entity/content.entity';
+import { ContentI } from 'src/enterfaces/content.model';
 
 @Injectable()
 export class DataService {
@@ -12,9 +14,14 @@ export class DataService {
     @InjectRepository(BoardsEntity)
     private userDataRepository: Repository<BoardsEntity>,
   ) {}
-  async creatdate(userData: BoardsDto): Promise<Board> {
-    const boards = await this.userDataRepository.save(userData);
-    return boards;
+
+  creatdate(userData: BoardsEntity): Observable<BoardsEntity> {
+    return from(this.userDataRepository.save(userData));
+  }
+
+  createProject(userData: BoardsEntity): Promise<Board> {
+    const project = this.userDataRepository.save(userData);
+    return project;
   }
 
   updatePost(userData: BoardsDto, id: number): Promise<Board> {
