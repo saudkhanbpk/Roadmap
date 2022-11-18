@@ -6,4 +6,10 @@ export interface Board {
   title: string;
   description: string;
   author: User;
+  userId?: number;
+}
+
+export enum Type {
+  private = 'private',
+  public = 'public',
 }

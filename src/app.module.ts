@@ -21,8 +21,9 @@ import { BoardsEntity } from './entity/board.entity';
 import { ResumeController } from './controllers/resume.controller';
 import { ResumeService } from './sevices/resume.service';
 import { ResumeEntity } from './entity/resume.entity';
-// import { join } from 'path';
-// import {HandlebarsAdapter} from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { ContentEntity } from './entity/content.entity';
+import { ContentService } from './sevices/content.service';
+
 @Module({
   imports: [
     CloudinaryModule,
@@ -57,7 +58,7 @@ import { ResumeEntity } from './entity/resume.entity';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'Nestjs',
+      database: 'roadmap',
       entities: [
         UserEntity,
         DataEntity,
@@ -67,6 +68,7 @@ import { ResumeEntity } from './entity/resume.entity';
         MemberEntity,
         BoardsEntity,
         ResumeEntity,
+        ContentEntity,
       ],
       synchronize: true,
     }),
@@ -79,6 +81,7 @@ import { ResumeEntity } from './entity/resume.entity';
       MemberEntity,
       BoardsEntity,
       ResumeEntity,
+      ContentEntity,
     ]),
     JwtModule.register({
       secret: 'secret',
@@ -86,6 +89,6 @@ import { ResumeEntity } from './entity/resume.entity';
     }),
   ],
   controllers: [AppController, DataController, ResumeController],
-  providers: [AppService, DataService, ResumeService],
+  providers: [AppService, DataService, ResumeService, ContentService],
 })
 export class AppModule {}

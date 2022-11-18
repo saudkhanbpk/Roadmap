@@ -1,14 +1,14 @@
 import { IsString, IsOptional, IsArray } from 'class-validator';
 import { Lables } from 'src/enterfaces/lable.model';
 import { Task } from 'src/enterfaces/task.model';
-import { UserData } from 'src/enterfaces/userdata.model';
+import { Columns } from 'src/enterfaces/userdata.model';
 
 export class cardDto {
   @IsOptional()
   key: number;
 
   @IsOptional()
-  project: UserData;
+  project: Columns;
 
   @IsString()
   @IsOptional()

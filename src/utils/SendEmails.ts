@@ -14,11 +14,15 @@ export const sendMail = async(email:string, link: string) => {
     });
 
     const info = await transporter.sendMail({
-        from: 'Bpk@gmail.com',
+        from: ' "Verify Your Email" <Roadmap@gmail.com',
         to: email,
         subject: 'Email verification',
-        text: 'Please click on the link to verify your email address and activate your account <p> expires in 1 day </p>',
-        html: ` <a href="${link}">Click here to confirm your email</a>`,
+        html: ` <h2> ${email}! Thanks For Registering On Our Site</h2>
+        <h4>Please Verify Your Email To Continue....</h4>
+        <a href="${link}">Verify  Your Email</a>
+        <h4>Link Expires In 24 Hours</h4>
+        </h4>
+        `,
     });
 
     console.log('Message sent: %s', info.messageId);

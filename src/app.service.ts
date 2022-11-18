@@ -38,9 +38,9 @@ export class AppService {
     }
     await this.userRepository.update({ id: userId }, { confirmed: true });
     res.send(
-      `<h1 style="text-align: center; margin-top: 100px;">Email Confirmed</h1>`,
-
-
+      `<h1 style="text-align: center; margin-top: 100px;">Email Verified</h1>
+      <p style="text-align: center; margin-top: 100px;">You can close this window now</p>
+`,
     );
 
   }
