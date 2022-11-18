@@ -31,6 +31,9 @@ export class UserEntity {
   @Column({ nullable: true })
   imagePath: string;
 
+  @Column({default:false})
+  confirmed: boolean;
+
   @OneToMany(() => BoardsEntity, (BoardsEntity) => BoardsEntity.author, {
     cascade: true,
     eager: true,

@@ -29,6 +29,7 @@ export class AppController {
     @Body('password') password: string,
     @Body('confirmPassword') confirmPassword: string,
     @Body('phoneNumber') phoneNumber: string,
+    @Body('confirmed') confirmed: boolean,
   ) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -38,6 +39,7 @@ export class AppController {
       password: hashedPassword,
       phoneNumber,
       confirmPassword,
+      confirmed,
     });
     delete user.password;
     return { user: user, message: 'Register' };

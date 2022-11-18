@@ -10,12 +10,14 @@ import {
   Post,
   Put,
   Req,
+  Response,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { BoardsDto } from 'src/dtos/boarddto';
 import { Board } from 'src/enterfaces/board.model';
 import { ContentI } from 'src/enterfaces/content.model';
 import { BoardsEntity } from 'src/entity/board.entity';
+import { Response as Res } from 'express';
 import { ContentEntity } from 'src/entity/content.entity';
 import { ContentService } from 'src/sevices/content.service';
 // import {
@@ -25,12 +27,16 @@ import { ContentService } from 'src/sevices/content.service';
 // } from 'src/helpers/image.storage';
 import { DataService } from 'src/sevices/data.service';
 import { DeleteResult } from 'typeorm';
+import { MailerService } from '@nestjs-modules/mailer/dist';
+import { AppService } from 'src/app.service';
 
 @Controller('api')
 export class DataController {
   constructor(
     private dataService: DataService,
     private contentService: ContentService,
+    private mailService: MailerService,
+    private appService: AppService,
   ) {}
 
   @Post('user/data')
@@ -71,6 +77,25 @@ export class DataController {
     const datas: Board[] = await this.dataService.findAllPosts();
     return { data: datas, message: 'get all user data' };
   }
+
+  @Post('sendEmail')
+  async sendEmail(@Body() body: any) {
+    const { email } = body;
+    await this.mailService.sendMail({
+      to: email,
+      from: 'imran@gmail',
+      subject: 'Testing Nest MailerModule ✔',
+
+    });
+    return { message: 'Email sent successfully' };
+
+  }
+  @Get('/confirm/:id') // http://localhost:9000/api/confirm/123
+  async confirmEmail(@Param('id') id: number, @Response() res: Res) {
+    this.appService.confirmEmail(id, res);
+  }
+
+
 
   @Post('create/content')
   createContent(@Body() content: ContentEntity) {

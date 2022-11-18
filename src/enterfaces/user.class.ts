@@ -6,4 +6,5 @@ export class User {
   password?: string;
   imagePath?: string;
   confirmPassword?: string;
+  confirmed?: boolean;
 }

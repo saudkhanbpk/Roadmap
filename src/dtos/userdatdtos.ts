@@ -7,6 +7,7 @@ export class userdataDto implements Columns {
   @IsOptional()
   key: number;
 
+
   @IsOptional()
   userId: number;
 

@@ -14,6 +14,8 @@ import { UserEntity } from './entity/user.entity';
 import { DataEntity } from './entity/userdata.entity';
 import { DataService } from './sevices/data.service';
 import { ConfigModule } from '@nestjs/config';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MemberEntity } from './entity/members.entity';
 import { BoardsEntity } from './entity/board.entity';
 import { ResumeController } from './controllers/resume.controller';
@@ -25,6 +27,25 @@ import { ContentService } from './sevices/content.service';
 @Module({
   imports: [
     CloudinaryModule,
+    MailerModule.forRoot({
+      transport: {
+        service: "gmail",
+        auth: {
+          user: "khannihar921@gmail.com",
+          pass: "hpgkjinzqtgguoof"
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      },
+      // template: {
+      //   dir: join(__dirname, '/view/'),
+      //   adapter: new HandlebarsAdapter(),
+      // }
+    }),
+    EventEmitterModule.forRoot(),
+
+
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
