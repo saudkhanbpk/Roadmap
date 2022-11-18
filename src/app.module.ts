@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { MulterModule } from '@nestjs/platform-express';
+// import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,6 +16,13 @@ import { DataService } from './sevices/data.service';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { MemberEntity } from './entity/members.entity';
+import { BoardsEntity } from './entity/board.entity';
+import { ResumeController } from './controllers/resume.controller';
+import { ResumeService } from './sevices/resume.service';
+import { ResumeEntity } from './entity/resume.entity';
+// import { join } from 'path';
+// import {HandlebarsAdapter} from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 @Module({
   imports: [
     CloudinaryModule,
@@ -25,8 +32,15 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
         auth: {
           user: "khannihar921@gmail.com",
           pass: "hpgkjinzqtgguoof"
+        },
+        tls: {
+          rejectUnauthorized: false
         }
-      }
+      },
+      // template: {
+      //   dir: join(__dirname, '/view/'),
+      //   adapter: new HandlebarsAdapter(),
+      // }
     }),
     EventEmitterModule.forRoot(),
 
@@ -43,8 +57,17 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       port: 5432,
       username: 'postgres',
       password: '393939Sk',
-      database: 'drawsql',
-      entities: [UserEntity, DataEntity, CardsEntity, TaskEntity, LableEntity],
+      database: 'Nestjs',
+      entities: [
+        UserEntity,
+        DataEntity,
+        CardsEntity,
+        TaskEntity,
+        LableEntity,
+        MemberEntity,
+        BoardsEntity,
+        ResumeEntity,
+      ],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([
@@ -53,13 +76,16 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       CardsEntity,
       TaskEntity,
       LableEntity,
+      MemberEntity,
+      BoardsEntity,
+      ResumeEntity,
     ]),
     JwtModule.register({
       secret: 'secret',
       signOptions: { expiresIn: '1d' },
     }),
   ],
-  controllers: [AppController, DataController],
-  providers: [AppService, DataService],
+  controllers: [AppController, DataController, ResumeController],
+  providers: [AppService, DataService, ResumeService],
 })
 export class AppModule {}

@@ -14,16 +14,16 @@ import { DataEntity } from './userdata.entity';
 @Entity('cards')
 export class CardsEntity implements Card {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
 
   @Column({ default: '' })
   desc: string;
 
   @Column({ default: '' })
-  ik: string;
+  id: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  date: Date;
+  @Column({ default: '' })
+  date: string;
 
   @Column({ default: '' })
   title: string;
@@ -34,7 +34,7 @@ export class CardsEntity implements Card {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  lable: LableEntity[];
+  labels: LableEntity[];
 
   @OneToMany(() => TaskEntity, (TaskEntity) => TaskEntity.taskdata, {
     cascade: true,
@@ -42,9 +42,9 @@ export class CardsEntity implements Card {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  task: TaskEntity[];
+  tasks: TaskEntity[];
 
   @ManyToOne(() => DataEntity, (DataEntity) => DataEntity.cards)
-  @JoinColumn({ name: 'datadId' })
+  @JoinColumn({ name: 'dataKey' })
   userdata: DataEntity;
 }

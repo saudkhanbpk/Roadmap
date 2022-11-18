@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { DataEntity } from './userdata.entity';
+import { BoardsEntity } from './board.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -31,11 +31,14 @@ export class UserEntity {
   @Column({ nullable: true })
   imagePath: string;
 
-  @OneToMany(() => DataEntity, (DataEntity) => DataEntity.author, {
+  @Column({default:false})
+  confirmed: boolean;
+
+  @OneToMany(() => BoardsEntity, (BoardsEntity) => BoardsEntity.author, {
     cascade: true,
     eager: true,
     onDelete: 'CASCADE',
     nullable: true,
   })
-  userdata: DataEntity[];
+  userdata: BoardsEntity[];
 }

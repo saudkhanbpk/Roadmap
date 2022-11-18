@@ -1,9 +1,10 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsArray } from 'class-validator';
 import { Card } from 'src/enterfaces/card.model';
+import { Member } from 'src/enterfaces/member.model';
 
 export class taskDto {
   @IsOptional()
-  id: number;
+  key: number;
 
   @IsOptional()
   project: Card;
@@ -14,7 +15,7 @@ export class taskDto {
 
   @IsString()
   @IsOptional()
-  ik: string;
+  id: string;
 
   @IsString()
   @IsOptional()
@@ -23,6 +24,23 @@ export class taskDto {
   @IsString()
   @IsOptional()
   title: string;
+
+  @IsString()
+  @IsOptional()
+  deadline: string;
+
+  @IsString()
+  @IsOptional()
+  created_by: string;
+
+  @IsString()
+  @IsOptional()
+  @IsArray()
+  comments: string[];
+
+  @IsOptional()
+  @IsArray()
+  tasks: Member[];
 
   /*   @IsOptional()
     name: string; */

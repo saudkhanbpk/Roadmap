@@ -1,10 +1,10 @@
 import { UserData } from './userdata.model';
 
 export interface Card {
-  id: number;
+  key: number;
   desc: string;
-  ik: string;
-  date: Date;
+  id: string;
+  date: string;
   userdata: UserData;
   title: string;
 }

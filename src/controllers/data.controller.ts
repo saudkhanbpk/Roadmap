@@ -1,8 +1,22 @@
-import {Body,Controller,Delete, Get,HttpCode, Param,Post,Put,Req,} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Req,
+  Response,
+} from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { userdataDto } from 'src/dtos/userdatdtos';
-import { UserData } from 'src/enterfaces/userdata.model';
-import { DataEntity } from 'src/entity/userdata.entity';
+import { BoardsDto } from 'src/dtos/boarddto';
+import { Board } from 'src/enterfaces/board.model';
+import { BoardsEntity } from 'src/entity/board.entity';
+import { Response as Res } from 'express';
 // import {
 //   isFileExtensionSafe,
 //   removeFile,
@@ -11,19 +25,23 @@ import { DataEntity } from 'src/entity/userdata.entity';
 import { DataService } from 'src/sevices/data.service';
 import { DeleteResult } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer/dist';
+import { AppService } from 'src/app.service';
 
 @Controller('api')
 export class DataController {
-  constructor(private dataService: DataService,private mailService: MailerService) {}
+  constructor(private dataService: DataService, private mailService: MailerService,
+
+    private appService: AppService
+    ) { }
 
   @Post('user/data')
-  create(@Body() userData: DataEntity) {
+  create(@Body() userData: BoardsEntity) {
     const newdata = this.dataService.creatdate(userData);
     return { data: newdata, message: 'New Data added' };
   }
 
   @Put('user/data/:id')
-  update(@Body() userData: userdataDto, @Param('id') id: number) {
+  update(@Body() userData: BoardsDto, @Param('id') id: number) {
     return this.dataService.updatePost(userData, id);
   }
 
@@ -31,9 +49,12 @@ export class DataController {
   @HttpCode(200)
   async getRoadmapById(
     @Req() @Param('id') id: number,
-  ): Promise<Observable<DataEntity>> {
-    return this.dataService.findRoadmapById(id);
-    // return { data: deleteResponse, message: 'delete object' };
+  ): Promise<Observable<BoardsEntity>> {
+    const update = this.dataService.findRoadmapById(id);
+    if (!id) {
+      throw new HttpException('ID not Found. Try another', HttpStatus.CONFLICT);
+    }
+    return update;
   }
 
   @Delete('/user/data/:id')
@@ -43,27 +64,29 @@ export class DataController {
     @Req() @Param('id') id: number,
   ): Promise<Observable<DeleteResult>> {
     return this.dataService.deleteRoadMap(id);
-    // return { data: deleteResponse, message: 'delete object' };
   }
 
   @Get('user/alldata')
   async findAll() {
-    const datas: UserData[] = await this.dataService.findAllPosts();
+    const datas: Board[] = await this.dataService.findAllPosts();
     return { data: datas, message: 'get all user data' };
-    // return this.dataService.findAllPosts(userData);
   }
 
-  @Post('send-email')
+  @Post('sendEmail')
   async sendEmail(@Body() body: any) {
-    const { email, subject, message } = body;
+    const { email } = body;
     await this.mailService.sendMail({
       to: email,
-      from: 'khan@gmail.com',
-      subject: subject,
-      text: message,
-      html: `<b>${message}</b>`,
+      from: 'imran@gmail',
+      subject: 'Testing Nest MailerModule ✔',
+
     });
     return { message: 'Email sent successfully' };
+
+  }
+  @Get('/confirm/:id') // http://localhost:9000/api/confirm/123
+  async confirmEmail(@Param('id') id: number, @Response() res: Res) {
+    this.appService.confirmEmail(id, res);
   }
 
 

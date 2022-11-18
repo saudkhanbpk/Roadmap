@@ -1,9 +1,9 @@
-import { User } from './user.class';
+import { Board } from './board.model';
 export interface UserData {
-  id: number;
+  key: number;
   title: string;
-  ik: string;
-  author: User;
+  id: string;
+  boardsdata: Board;
 }
 
 export interface Attachment {

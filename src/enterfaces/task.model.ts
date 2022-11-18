@@ -1,8 +1,11 @@
 import { Card } from './card.model';
 export interface Task {
-  id: number;
+  key: number;
   completed: string;
   text: string;
-  ik: string;
+  id: string;
+  deadline: string;
+  created_by: string;
+  comments: string[];
   taskdata: Card;
 }

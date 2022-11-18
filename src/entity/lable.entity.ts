@@ -11,7 +11,10 @@ import { CardsEntity } from './cards.entity';
 @Entity('lable')
 export class LableEntity implements Lables {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
+
+  @Column({ default: '' })
+  id: string;
 
   @Column({ default: '' })
   color: string;
@@ -19,7 +22,7 @@ export class LableEntity implements Lables {
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.lable)
-  @JoinColumn({ name: 'cardId' })
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.labels)
+  @JoinColumn({ name: 'cardsKey' })
   labledata: CardsEntity;
 }

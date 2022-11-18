@@ -5,23 +5,42 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { CardsEntity } from './cards.entity';
+import { MemberEntity } from './members.entity';
 @Entity('task')
 export class TaskEntity implements Task {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
 
   @Column({ default: '' })
   completed: string;
 
   @Column({ default: '' })
-  ik: string;
+  id: string;
 
   @Column({ default: '' })
   text: string;
 
-  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.task)
-  @JoinColumn({ name: 'cardId' })
+  @Column({ default: '' })
+  deadline: string;
+
+  @Column({ default: '' })
+  created_by: string;
+
+  @Column('text', { array: true, nullable: true })
+  comments: string[];
+
+  @ManyToOne(() => CardsEntity, (CardsEntity) => CardsEntity.tasks)
+  @JoinColumn({ name: 'cardsKey' })
   taskdata: CardsEntity;
+
+  @OneToMany(() => MemberEntity, (memberEntity) => memberEntity.memberdata, {
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  members: MemberEntity[];
 }

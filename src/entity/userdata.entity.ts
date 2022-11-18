@@ -7,19 +7,19 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
+import { BoardsEntity } from './board.entity';
 import { CardsEntity } from './cards.entity';
-import { UserEntity } from './user.entity';
 
 @Entity({ name: 'data' })
 export class DataEntity implements UserData {
   @PrimaryGeneratedColumn()
-  id: number;
+  key: number;
 
   @Column({ default: '' })
   title: string;
 
   @Column({ default: '' })
-  ik: string;
+  id: string;
 
   @OneToMany(() => CardsEntity, (CardsEntity) => CardsEntity.userdata, {
     cascade: true,
@@ -29,10 +29,7 @@ export class DataEntity implements UserData {
   })
   cards: CardsEntity[];
 
-  @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
-    // eager: true,
-    nullable: true,
-  })
-  @JoinColumn({ name: 'userId' })
-  author: UserEntity;
+  @ManyToOne(() => BoardsEntity, (BoardsEntity) => BoardsEntity.boards)
+  @JoinColumn({ name: 'boardsKey' })
+  boardsdata: BoardsEntity;
 }
