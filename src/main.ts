@@ -5,25 +5,20 @@ import cors from 'cors';
 import * as Store from 'connect-redis';
 import * as session from 'express-session';
 import { redis } from './Redis';
-import {RedisClient} from 'redis';
 async function bootstrap() {
   const RedisStore = Store(session);
   const app = await NestFactory.create(AppModule, { cors: true });
-
-
-
-
-
 
   app.use(cookieParser(), session({
     store: new RedisStore({
       client: redis as any,
     }),
-    name: 'qid',
-    secret: 'asldkfjalksjdf',
+
+    name: 'RoadmapApp',
+    secret: 'SECRET',
     resave: false,
     saveUninitialized: false,
-    cookie: { httpOnly: true, secure: false,},
+    cookie: { httpOnly: true, secure: false, maxAge: 1000 * 60 * 60 * 24 * 365 * 10 },
   }));
 
   // app.enableCors({
