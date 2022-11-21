@@ -1,6 +1,6 @@
 import { CONFIRM_EMAIL_PREFIX } from 'src/Constants';
 import {v4} from 'uuid';
-import {redis} from '../redis';
+import {redis} from 'src/Redis';
 export const createConfirmEmailLink = async(userId: number) => {
     const id = v4();
     await redis.set(`${CONFIRM_EMAIL_PREFIX}${id}`, userId, 'EX', 60 * 60 * 15);
