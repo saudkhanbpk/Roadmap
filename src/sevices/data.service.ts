@@ -13,10 +13,14 @@ export class DataService {
   constructor(
     @InjectRepository(BoardsEntity)
     private userDataRepository: Repository<BoardsEntity>,
-  ) {}
-  async creatdate(userData: BoardsDto): Promise<Board> {
-    const boards = await this.userDataRepository.save(userData);
-    return boards;
+  ) { }
+
+  // async creatdate(userData: BoardsDto): Promise<Board> {
+  //   const boards = await this.userDataRepository.save(userData);
+  //   return boards;
+
+  creatdate(userData: BoardsEntity): Observable<BoardsEntity> {
+    return from(this.userDataRepository.save(userData));
   }
 
   createProject(userData: BoardsEntity): Promise<Board> {

@@ -5,6 +5,7 @@ import cors from 'cors';
 import * as Store from 'connect-redis';
 import * as session from 'express-session';
 import { redis } from './Redis';
+import {RedisClient} from 'redis';
 async function bootstrap() {
   const RedisStore = Store(session);
   const app = await NestFactory.create(AppModule, { cors: true });

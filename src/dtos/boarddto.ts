@@ -32,4 +32,8 @@ export class BoardsDto implements Board {
   @IsOptional()
   @IsArray()
   boards: Columns[];
+
+  @IsOptional()
+  @IsArray()
+  members1: Columns[];
 }

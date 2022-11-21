@@ -18,6 +18,7 @@ import {
   JoinColumn,
   Column,
 } from 'typeorm';
+import { MemberEntity } from './members.entity';
 import { UserEntity } from './user.entity';
 import { DataEntity } from './userdata.entity';
 
@@ -45,6 +46,14 @@ export class BoardsEntity implements Board {
     nullable: true,
   })
   boards: DataEntity[];
+
+  @OneToMany(() => MemberEntity, (memberEntity) => memberEntity.memberdatas, {
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  members1: MemberEntity[];
 
   @ManyToOne(() => UserEntity, (UserEntity) => UserEntity.userdata, {
     // eager: true,

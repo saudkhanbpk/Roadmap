@@ -29,7 +29,7 @@ export class DataEntity implements Columns {
   })
   cards: CardsEntity[];
 
-  @ManyToOne(() => BoardsEntity, {
+  @ManyToOne(() => BoardsEntity, (boardsEntity) => boardsEntity.boards, {
     // onDelete: 'CASCADE',
     nullable: true,
   })

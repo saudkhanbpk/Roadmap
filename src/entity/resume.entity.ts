@@ -1,7 +1,7 @@
 import { Resume } from 'src/enterfaces/resume.model';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('rsesume')
+@Entity('resume')
 export class ResumeEntity implements Resume {
   @PrimaryGeneratedColumn()
   id: number;
