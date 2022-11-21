@@ -5,8 +5,7 @@ export const createConfirmEmailLink = async(userId: number) => {
     const id = v4();
     await redis.set(`${CONFIRM_EMAIL_PREFIX}${id}`, userId, 'EX', 60 * 60 * 15);
     // 1 day expiration
-    return `http://localhost:9000/api/confirm/${id}`;
-
+    return `https://new-roadmap-backend.herokuapp.com/api/confirm/${id}`;
 };
 
 
