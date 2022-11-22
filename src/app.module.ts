@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 // import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -23,10 +23,15 @@ import { ResumeService } from './sevices/resume.service';
 import { ResumeEntity } from './entity/resume.entity';
 import { ContentEntity } from './entity/content.entity';
 import { ContentService } from './sevices/content.service';
+import { ConfirmEmailService } from './utils/ConfirmEmail';
 
 @Module({
   imports: [
     CloudinaryModule,
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 60 * 60 * 24,
+    }),
     MailerModule.forRoot({
       transport: {
         service: "gmail",
@@ -89,6 +94,6 @@ import { ContentService } from './sevices/content.service';
     }),
   ],
   controllers: [AppController, DataController, ResumeController],
-  providers: [AppService, DataService, ResumeService, ContentService],
+  providers: [AppService, DataService, ResumeService, ContentService, ConfirmEmailService],
 })
 export class AppModule {}
