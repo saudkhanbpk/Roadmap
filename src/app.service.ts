@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, CACHE_MANAGER, Inject,} from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  CACHE_MANAGER,
+  Inject,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entity/user.entity';
@@ -8,7 +13,7 @@ import { ConfirmEmailService } from './utils/ConfirmEmail';
 import { redis } from './Redis';
 import { Response } from 'express';
 import { CONFIRM_EMAIL_PREFIX } from './Constants';
-import {Cache} from 'cache-manager';
+import { Cache } from 'cache-manager';
 @Injectable()
 export class AppService {
   constructor(
@@ -24,22 +29,21 @@ export class AppService {
     const link = await this.confirmEmails.createConfirmEmailLink(user.id);
     await sendMail(user.email, link);
     return user;
-  //   const User =
-  //      this.userRepository.save(data);
-  //  await sendMail(data.email, await createConfirmEmailLink(data.id));
-  //   return null;
-
-
-
+    //   const User =
+    //      this.userRepository.save(data);
+    //  await sendMail(data.email, await createConfirmEmailLink(data.id));
+    //   return null;
   }
 
   async confirmEmail(id: number, res: Response) {
-    let userId: number = parseInt(await this.cacheManager.get(`${CONFIRM_EMAIL_PREFIX}${id}`));
+    let userId: number = parseInt(
+      await this.cacheManager.get(`${CONFIRM_EMAIL_PREFIX}${id}`),
+    );
     console.log(await this.cacheManager.get(`${CONFIRM_EMAIL_PREFIX}${id}`));
     // userId = parseInt(userId);
     if (!userId) {
       throw new BadRequestException('Invalid Link');
-    // await this.userRepository.update({ id: userId }, { confirmed: true });
+      // await this.userRepository.update({ id: userId }, { confirmed: true });
     }
     await this.userRepository.update({ id: userId }, { confirmed: true });
     res.send(
@@ -47,7 +51,6 @@ export class AppService {
       <p style="text-align: center; margin-top: 100px;">You can close this window now</p>
 `,
     );
-
   }
   async findOne(condition: any): Promise<UserEntity> {
     return this.userRepository.findOne(condition);

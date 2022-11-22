@@ -17,7 +17,7 @@ export class ConfirmEmailService {
     async createConfirmEmailLink(userId: number) {
         const id = v4();
         await this.cacheManager.set(`${CONFIRM_EMAIL_PREFIX}${id}`, userId);
-        return `http://localhost:9000/api/confirm/${id}`;
+        return `https://new-roadmap-backend.herokuapp.com/api/confirm/${id}`;
     }
 }
 
