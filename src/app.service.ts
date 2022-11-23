@@ -63,4 +63,8 @@ export class AppService {
     console.log(uploadimages.url);
     return uploadimages;
   }
+
+  async updatePassword(id: number, data: any) {
+    return this.userRepository.save({ id, ...data });
+  }
 }

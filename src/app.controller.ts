@@ -42,7 +42,7 @@ export class AppController {
       confirmed,
     });
     delete user.password;
-    return { user: user, message: 'Register' };
+    return { user: user, message: 'User Registered Successfully' };
   }
 
   @Post('login')
@@ -106,6 +106,28 @@ export class AppController {
   uploadImage(@UploadedFile() file: Express.Multer.File) {
     return this.appService.uploadImageToCloudinary(file);
   }
+
+  @Post('forgetPassword')
+  async forgetPassword(
+    @Body('email') email: string,
+    @Body('password') password: string,
+    @Body('confirmPassword') confirmPassword: string,
+  ) {
+    const user = await this.appService.findOne({ where: { email: email } });
+    if (!user) {
+      throw new BadRequestException('invalid credentials');
+    }
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const updatedUser = await this.appService.updatePassword(user.id, {
+      password: hashedPassword,
+      confirmPassword: password,
+    });
+    delete updatedUser.password;
+    return { user: updatedUser, message: 'Password updated' };
+  }
+
+
+
 
   // @Post('images')
   // @UseInterceptors(FilesInterceptor('profile'))

@@ -7,6 +7,7 @@ import {
   HttpException,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Put,
   Req,
@@ -46,7 +47,7 @@ export class DataController {
     return this.dataService.createProject(userData);
   }
 
-  @Put('user/data/:id')
+  @Patch('user/data/:id')
   update(@Body() userData: BoardsDto, @Param('id') id: number) {
     return this.dataService.updatePost(userData, id);
   }
