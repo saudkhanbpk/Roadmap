@@ -10,7 +10,6 @@ import { UserEntity } from './entity/user.entity';
 import { CloudinaryService } from './cloudinary/cloudinary.service';
 import { sendMail } from './utils/SendEmails';
 import { ConfirmEmailService } from './utils/ConfirmEmail';
-import { redis } from './Redis';
 import { Response } from 'express';
 import { CONFIRM_EMAIL_PREFIX } from './Constants';
 import { Cache } from 'cache-manager';
@@ -22,7 +21,7 @@ export class AppService {
     private userRepository: Repository<UserEntity>,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private confirmEmails: ConfirmEmailService,
-  ) {}
+  ) { }
   async create(data: any): Promise<UserEntity> {
     // return this.userRepository.save(data);
     const user = await this.userRepository.save(data);

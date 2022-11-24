@@ -48,10 +48,10 @@ export class BoardsEntity implements Board {
   boards: DataEntity[];
 
   @OneToMany(() => MemberEntity, (memberEntity) => memberEntity.memberdatas, {
-    cascade: true,
-    eager: true,
-    onDelete: 'CASCADE',
-    nullable: true,
+    // cascade: true,
+    // eager: true,
+    // onDelete: 'CASCADE',
+    // nullable: true,
   })
   members1: MemberEntity[];
 
